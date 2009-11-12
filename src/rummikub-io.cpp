@@ -12,7 +12,7 @@ std::ostream &operator<<(std::ostream &os, const TileList &vt)
 {
     for (TileList::const_iterator it = vt.begin(); it != vt.end(); ++it)
     {
-        if (it != vt.begin()) os << ',';
+        if (it != vt.begin()) os << '.';
         if (!(os << *it)) break;
     }
     return os;
@@ -22,7 +22,7 @@ std::ostream &operator<<(std::ostream &os, const Table &vvt)
 {
     for (Table::const_iterator it = vvt.begin(); it != vvt.end(); ++it)
     {
-        if (it != vvt.begin()) os << ';';
+        if (it != vvt.begin()) os << '-';
         if (!(os << *it)) break;
     }
     return os;
@@ -51,7 +51,7 @@ std::istream &operator>>(std::istream &is, TileList &vt)
     {
         vt.clear();
         vt.push_back(t);
-        while (is.peek() == ',')
+        while (is.peek() == '.')
         {
             (void)is.get();
             if (is >> t)
@@ -70,7 +70,7 @@ std::istream &operator>>(std::istream &is, Table &vvt)
     {
         vvt.clear();
         vvt.push_back(vt);
-        while (is.peek() == ';')
+        while (is.peek() == '-')
         {
             (void)is.get();
             if (is >> vt)

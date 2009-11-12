@@ -1,51 +1,18 @@
 #include "rummikub.h"
+
 #include <algorithm>
 #include <ctime>
+#include <fstream>
+#include <iostream>
 #include <sstream>
+#include <string>
 #include <utility>
+
+#include <fcntl.h>
 #include <unistd.h>
 
-int get_rand_int(int bound) { return random()%bound; }
-
-static TileList create_random_pool(unsigned seed)
-{
-    TileList pool;
-
-    srandom(seed);
-    pool.reserve(4*13*2);
-    for (int color = 0; color < 4; ++color)
-    {
-        for (int value = 1; value <= 13; ++value)
-        {
-            for (int dupes = 0; dupes < 2; ++dupes)
-            {
-                pool.push_back(Tile(color, value));
-            }
-        }
-    }
-
-    std::random_shuffle(pool.begin(), pool.end(), get_rand_int);
-
-    return pool;
-}
-
-static GameState create_game_state(unsigned seed)
-{
-    GameState res;
-    TileList pool = create_random_pool(seed);
-    TileList::iterator it = pool.begin();
-
-    res.next_player = 0;
-    for (int player = 0; player < 4; ++player)
-    {
-        res.player_tiles[player] = TileList(it, it + 14);
-        it += 14;
-    }
-    res.pool_tiles = TileList(it, pool.end());
-    return res;
-}
-
-std::ostream &operator<<(std::ostream &os, const GameState &gs)  // DEBUG
+#if 0
+static std::ostream &operator<<(std::ostream &os, const GameState &gs)
 {
     os << "Next player: " << gs.next_player + 1 << '\n';
     for (int player = 0; player < 4; ++player)
@@ -56,45 +23,76 @@ std::ostream &operator<<(std::ostream &os, const GameState &gs)  // DEBUG
     os << "Pool: " << gs.pool_tiles << '\n';
     return os;
 }
+#endif
 
-int main()
+static const int rpc_timeout = 6;  // seconds
+
+struct Player
 {
-    std::ostream &xscr = std::cout;
+    std::string name;
+    std::string url;
+    bool        post;
+    int         fd;
+};
 
-    // Create a new random game
-    unsigned seed = time(NULL) ^ (getpid() << 16);
-    GameState gs = create_game_state(seed);
+class FileLock
+{
+public:
+    FileLock(int fd) : fd_(fd) { lock(true); }
+    ~FileLock() { lock(false);  }
+private:
+    void lock(bool lock) {
+        if (lockf(fd_, lock ? F_LOCK : F_ULOCK, 0) != 0)
+            perror("lockf() failed");
+    }
+    int fd_;
+};
 
-    const char *player_name[4] = {
-        "Simple 1",
-        "Simple 2",
-        "Simple 3",
-        "Simple 4" };
+bool load_player(const char *path, Player &player)
+{
+    std::string line;
+    std::fstream ifs(path);
+    std::getline(ifs, player.name);
+    std::getline(ifs, player.url);
+    std::getline(ifs, line);
+    if (line == "GET")  player.post = false; else
+    if (line == "POST") player.post = true; else return false;
+    if (!ifs) return false;
+    player.fd = open(path, O_RDWR);
+    if (player.fd < 0) return false;
+    return true;
+}
 
-    const char *player_url[4] = {
-        "http://hell.student.utwente.nl/rummikub/simple-player.php",
-        "http://hell.student.utwente.nl/rummikub/simple-player.php",
-        "http://hell.student.utwente.nl/rummikub/simple-player.php",
-        "http://hell.student.utwente.nl/rummikub/simple-player.php" };
-    bool player_method[4] = { 1, 1, 1, 1 };
+bool load_tiles(const char *path, TileList &tiles)
+{
+    std::ifstream ifs(path);
+    return (ifs >> tiles) && tiles.size() == 2*13*4;
+}
+
+void run_game(std::ostream &xscr, const TileList &tiles, Player (&players)[4])
+{
+    GameState gs(tiles);
 
     xscr << "<?xml version='1.0' encoding='UTF-8' ?>"
-         << "<rummikub-transcript>\n";
+            "<rummikub-transcript>\n";
 
     xscr << " <setup>\n"
-         << "  <seed>" << seed << "</seed>\n"
          << "  <players>\n";
-    for (int player = 0; player < 4; ++player)
+    for (int i = 0; i < 4; ++i)
     {
-        xscr << "   <player id='" << player + 1 << "'>\n"
-             << "    <name>" << player_name[player] << "</name>\n"
-             << "    <tiles>" << gs.player_tiles[player] << "</tiles>\n"
-             << "   </player>\n";
+        const Player &pl = players[i];
+        xscr << "   <player id='" << i + 1 << "'>\n"
+                "    <name>" << pl.name << "</name>\n"
+                "    <url>" << pl.url
+                 << "</url>\n"
+                "    <method>" << (pl.post ? "POST" : "GET") << "</method>\n"
+                "    <tiles>" << gs.player_tiles[i] << "</tiles>\n"
+                "   </player>\n";
     }
     xscr << "  </players>\n"
-         << "  <pool size='" << gs.pool_tiles.size() << "'>"
-         << gs.pool_tiles << "</pool>\n"
-         << " </setup>\n\n";
+            "  <pool size='" << gs.pool_tiles.size() << "'>" << gs.pool_tiles <<
+              "</pool>\n"
+            " </setup>\n\n" << std::flush;
 
     int turn_no = 0;
     while (!gs.is_game_over())
@@ -102,17 +100,17 @@ int main()
         ++turn_no;
 
         const TileList &tiles = gs.player_tiles[gs.next_player];
+        const Player &pl = players[gs.next_player];
+        FileLock fl(pl.fd);
+
+        std::string response, error;
         TileList played_tiles;
         Table new_table;
-
-        const char *url = player_url[gs.next_player];
-        bool method = player_method[gs.next_player];
-        std::string response, error;
 
         xscr << " <turn no='" << turn_no << "' player='"
              << gs.next_player + 1 << "'>\n";
 
-        if (!rpc_move(url, method, 6, gs, response))
+        if (!rpc_move(pl.url.c_str(), pl.post, rpc_timeout, gs, response))
         {
             error = "RPC failed";
         }
@@ -140,21 +138,21 @@ int main()
         {
             Tile drawn(0);
             gs.draw(&drawn);
-            xscr << "  <drawn>" << drawn << "</drawn>\n";
+            xscr << "  <drawn>" << drawn << "</drawn>\n"
+                 << "  <pool size='" << gs.pool_tiles.size() << "'/>\n";
         }
         else
         {
-            xscr << "  <played>" << played_tiles << "</played>\n";
+            xscr << "  <played>" << played_tiles << "</played>\n"
+                    "  <table>" << new_table << "</table>\n";
         }
 
-        xscr << "  <table>" << new_table << "</table>\n"
-             << "  <tiles value='" << total_value(tiles) << "'>"
-             << tiles << "</tiles>\n"
-             << "  <pool size='" << gs.pool_tiles.size() << "'/>\n";
+        xscr << "  <tiles value='" << total_value(tiles) << "'>"
+             << tiles << "</tiles>\n";
 
         if (!error.empty()) xscr << "  <error>" << error << "</error>\n";
 
-        xscr << " </turn>\n";
+        xscr << " </turn>\n" << std::flush;
     }
 
     xscr << "\n <scores>\n";
@@ -171,12 +169,43 @@ int main()
             int v = score_player[i].first;
             int p = score_player[i].second;
             xscr << "  <score>\n"
-                 << "    <player id='" << p + 1 << "'>"
-                 << player_name[p] << "</player>\n"
-                 << "    <value>" << v << "</value>\n"
-                 << "  </score>\n";
+                    "    <player id='" << p + 1 << "'>" <<
+                players[i].name << "</player>\n"
+                    "    <value>" << v << "</value>\n"
+                    "  </score>\n";
         }
     }
     xscr << " </scores>\n"
-         << "</rummikub-transcript>\n";
+         << "</rummikub-transcript>\n" << std::flush;
+}
+
+int main(int argc, const char *argv[])
+{
+    if (argc != 6)
+    {
+        std::cout << "usage: arbiter <player1> <player2> <player3> <player4> "
+                     "<tiles>" << std::endl;
+        return 1;
+    }
+
+    Player players[4];
+    for (int i = 0; i < 4; ++i)
+    {
+        if (!load_player(argv[1 + i], players[i]))
+        {
+            std::cout << "Couldn't read player data from: "
+                      << argv[1 + i] << std::endl;
+            return 1;
+        }
+    }
+
+    TileList tiles;
+    if (!load_tiles(argv[5], tiles))
+    {
+        std::cout << "Couldn't load tile data from: "
+                  << argv[5] << std::endl;
+        return 1;
+    }
+
+    run_game(std::cout, tiles, players);
 }

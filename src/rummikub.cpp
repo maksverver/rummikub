@@ -62,7 +62,6 @@ void normalize(TileList &tiles)
     std::sort(tiles.begin(), tiles.end());
 }
 
-#include <iostream>
 void normalize(Table &table)
 {
     for (Table::iterator it = table.begin(); it != table.end(); ++it)
@@ -71,6 +70,21 @@ void normalize(Table &table)
     }
 }
 
+// Constructs a new game state for the given random seed
+GameState::GameState(const TileList &pool)
+{
+    TileList::const_iterator it = pool.begin();
+
+    next_player = 0;
+    for (int player = 0; player < 4; ++player)
+    {
+        player_tiles[player] = TileList(it, it + 14);
+        it += 14;
+    }
+    pool_tiles = TileList(it, pool.end());
+}
+
+// Returns whether the game is over
 bool GameState::is_game_over()
 {
     if (pool_tiles.empty()) return true;
@@ -89,7 +103,6 @@ bool GameState::draw(Tile *drawn_out)
     if (drawn_out) *drawn_out = drawn;
     return true;
 }
-
 
 static TileList table_to_sorted_list(const Table &table)
 {

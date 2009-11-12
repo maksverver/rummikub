@@ -15,8 +15,8 @@ static std::string build_query_string(const GameState &gs)
         << "&table=" << gs.table_tiles
         << "&poolTiles=" << gs.pool_tiles.size()
         << "&opponentsTiles=" << gs.player_tiles[(gs.next_player + 1)%4].size()
-        << ','                << gs.player_tiles[(gs.next_player + 2)%4].size()
-        << ','                << gs.player_tiles[(gs.next_player + 3)%4].size();
+        << '-'                << gs.player_tiles[(gs.next_player + 2)%4].size()
+        << '-'                << gs.player_tiles[(gs.next_player + 3)%4].size();
     return oss.str();
 }
 

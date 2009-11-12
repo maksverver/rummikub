@@ -20,6 +20,8 @@ typedef std::vector<TileList> Table;
 
 struct GameState
 {
+    GameState(const TileList &pool);
+
     int         next_player;
     TileList    player_tiles[4];
     Table       table_tiles;
