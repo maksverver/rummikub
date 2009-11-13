@@ -22,15 +22,18 @@ struct GameState
 {
     GameState(const TileList &pool);
 
-    int         next_player;
+    int         next_player, pass_count;
     TileList    player_tiles[4];
     Table       table_tiles;
     TileList    pool_tiles;
 
     bool is_game_over();
-    bool draw(Tile *drawn = 0);
     bool move(const Table &new_table, TileList *played = 0);
+    bool draw(Tile *drawn = 0);
+    bool pass();
     int score(int player);
+private:
+    void next(bool passed = false);
 };
 
 int total_value(const TileList &tiles);

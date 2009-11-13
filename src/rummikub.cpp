@@ -76,6 +76,7 @@ GameState::GameState(const TileList &pool)
     TileList::const_iterator it = pool.begin();
 
     next_player = 0;
+    pass_count  = 0;
     for (int player = 0; player < 4; ++player)
     {
         player_tiles[player] = TileList(it, it + 14);
@@ -87,21 +88,10 @@ GameState::GameState(const TileList &pool)
 // Returns whether the game is over
 bool GameState::is_game_over()
 {
-    if (pool_tiles.empty()) return true;
+    if (pass_count == 4) return true;
     for (int player = 0; player < 4; ++player)
         if (player_tiles[player].empty()) return true;
     return false;
-}
-
-bool GameState::draw(Tile *drawn_out)
-{
-    if (pool_tiles.empty()) return false;
-    Tile drawn = *pool_tiles.begin();
-    pool_tiles.erase(pool_tiles.begin());
-    player_tiles[next_player].push_back(drawn);
-    next_player = (next_player + 1)%4;
-    if (drawn_out) *drawn_out = drawn;
-    return true;
 }
 
 static TileList table_to_sorted_list(const Table &table)
@@ -146,8 +136,32 @@ bool GameState::move(const Table &new_table, TileList *played_out)
     if (played_out) played_out->swap(played);
     table_tiles = new_table;
     player_tiles[next_player] = new_tiles;
-    next_player = (next_player + 1)%4;
+    next();
     return true;
+}
+
+bool GameState::draw(Tile *drawn_out)
+{
+    if (pool_tiles.empty()) return false;
+    Tile drawn = *pool_tiles.begin();
+    pool_tiles.erase(pool_tiles.begin());
+    player_tiles[next_player].push_back(drawn);
+    if (drawn_out) *drawn_out = drawn;
+    next();
+    return true;
+}
+
+bool GameState::pass()
+{
+    if (!pool_tiles.empty()) return false;
+    next(true);
+    return true;
+}
+
+void GameState::next(bool passed)
+{
+    next_player = (next_player + 1)%4;
+    pass_count = passed ? pass_count + 1 : 0;
 }
 
 int GameState::score(int player)

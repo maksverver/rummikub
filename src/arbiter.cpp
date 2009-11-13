@@ -25,7 +25,7 @@ static std::ostream &operator<<(std::ostream &os, const GameState &gs)
 }
 #endif
 
-static const int rpc_timeout = 6;  // seconds
+static const int rpc_timeout = 10;  // seconds
 
 struct Player
 {
@@ -137,9 +137,16 @@ void run_game(std::ostream &xscr, const TileList &tiles, Player (&players)[4])
         if (played_tiles.empty())
         {
             Tile drawn(0);
-            gs.draw(&drawn);
-            xscr << "  <drawn>" << drawn << "</drawn>\n"
-                 << "  <pool size='" << gs.pool_tiles.size() << "'/>\n";
+            if (gs.draw(&drawn))
+            {
+                xscr << "  <drawn>" << drawn << "</drawn>\n"
+                     << "  <pool size='" << gs.pool_tiles.size() << "'/>\n";
+            }
+            else
+            if (gs.pass())
+            {
+                xscr << "  <pass count='" << gs.pass_count << "'/>\n";
+            }
         }
         else
         {
@@ -169,8 +176,8 @@ void run_game(std::ostream &xscr, const TileList &tiles, Player (&players)[4])
             int v = score_player[i].first;
             int p = score_player[i].second;
             xscr << "  <score>\n"
-                    "    <player id='" << p + 1 << "'>" <<
-                players[i].name << "</player>\n"
+                    "    <player id='" << p + 1 << "'>" << players[p].name <<
+                        "</player>\n"
                     "    <value>" << v << "</value>\n"
                     "  </score>\n";
         }

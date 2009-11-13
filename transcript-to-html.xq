@@ -73,6 +73,8 @@ declare variable $nav-bar :=
                 {local:format-tiles($drawn/text())}
             </div>,
             <p>{data($turn/pool/@size)} tiles left.</p>) }
+        { for $pass in $turn/pass
+          return <p>Pass ({data($pass/@count)}).</p> }
         </li>
   }
   </ol>
