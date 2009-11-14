@@ -48,6 +48,13 @@ private:
     int fd_;
 };
 
+double now()
+{
+    struct timespec tp = { 0, 0 };
+    clock_gettime(CLOCK_MONOTONIC, &tp);
+    return tp.tv_sec + tp.tv_nsec/1e9;
+}
+
 bool load_player(const char *path, Player &player)
 {
     std::string line;
@@ -107,29 +114,31 @@ void run_game(std::ostream &xscr, const TileList &tiles, Player (&players)[4])
         TileList played_tiles;
         Table new_table;
 
-        xscr << " <turn no='" << turn_no << "' player='"
-             << gs.next_player + 1 << "'>\n";
+        double delay = now();
+        bool ok = rpc_move(pl.url.c_str(), pl.post, rpc_timeout, gs, response);
+        delay = now() - delay;
 
-        if (!rpc_move(pl.url.c_str(), pl.post, rpc_timeout, gs, response))
+        xscr << " <turn no='" << turn_no << "' player='"
+             << gs.next_player + 1 << "' rpc-delay='" << delay << "s'>\n";
+
+        if (!ok)
         {
             error = "RPC failed";
         }
         else
+        if (response.compare(0, 4, "draw") != 0)
         {
-            if (response.compare(0, 4, "draw") != 0)
+            std::istringstream iss(response);
+            if (!(iss >> new_table))
             {
-                std::istringstream iss(response);
-                if (!(iss >> new_table))
+                error = "syntax error in request response";
+            }
+            else
+            {
+                normalize(new_table);
+                if (!gs.move(new_table, &played_tiles))
                 {
-                    error = "syntax error in request response";
-                }
-                else
-                {
-                    normalize(new_table);
-                    if (!gs.move(new_table, &played_tiles))
-                    {
-                        error = "invalid table configuration";
-                    }
+                    error = "invalid table configuration";
                 }
             }
         }
@@ -157,7 +166,11 @@ void run_game(std::ostream &xscr, const TileList &tiles, Player (&players)[4])
         xscr << "  <tiles value='" << total_value(tiles) << "'>"
              << tiles << "</tiles>\n";
 
-        if (!error.empty()) xscr << "  <error>" << error << "</error>\n";
+        if (!error.empty())
+        {
+            xscr << "  <error>" << error << "</error>\n";
+            xscr << "  <response><![CDATA[" << response << "]]></response>\n";
+        }
 
         xscr << " </turn>\n" << std::flush;
     }

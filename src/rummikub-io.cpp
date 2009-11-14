@@ -54,11 +54,10 @@ std::istream &operator>>(std::istream &is, TileList &vt)
         while (is.peek() == '.')
         {
             (void)is.get();
-            if (is >> t)
-                vt.push_back(t);
-            else
-                break;
+            if (is >> t) vt.push_back(t);
+            else break;
         }
+        if (is.eof()) is.clear(std::ios::eofbit);
     }
     return is;
 }
@@ -73,11 +72,10 @@ std::istream &operator>>(std::istream &is, Table &vvt)
         while (is.peek() == '-')
         {
             (void)is.get();
-            if (is >> vt)
-                vvt.push_back(vt);
-            else
-                break;
+            if (is >> vt) vvt.push_back(vt);
+            else break;
         }
+        if (is.eof()) is.clear(std::ios::eofbit);
     }
     return is;
 }
