@@ -1,12 +1,15 @@
 #!/bin/sh
 
-if [ ! -f "$1" ]
+DIR=`dirname "$0"`
+FILE=`readlink -f "$1"`
+
+if [ ! -f "$FILE" ]
 then
-	echo "Not a file: $1"
+	echo "Not a file: $FILE"
 	exit 1
 fi
 
-saxon9-xq transcript-to-html.xq file="$1" \
+saxon9-xq "$DIR"/transcript-to-html.xq file="$FILE" \
 	'!indent=no' \
 	'!doctype-public=-//W3C//DTD XHTML 1.0 Strict//EN' \
 	'!doctype-system=http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd' \

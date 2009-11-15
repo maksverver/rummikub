@@ -52,7 +52,7 @@ declare variable $nav-bar :=
   <h2 id="transcript">Game Transcript</h2>
   <ol class="turns">
   {
-    for $turn in $doc/turn
+    for $turn in $doc/turns/turn
     let $name := $doc/setup/players/player[@id=$turn/@player]/name/text()
     let $tiles := $turn/tiles/text()
 
@@ -81,10 +81,13 @@ declare variable $nav-bar :=
 
   <h2 id="scores">Final Scores</h2>
   <ol class="scores">{
-    for $score in $doc/scores/score return
+    for $score in $doc/scores/score
+    let $name := $doc/setup/players/player[@id=$score/@player]/name/text()
+    order by number($score/text()) ascending
+    return
     <li class="score">
-     <div class="name">{$score/player/text()}</div>
-     <div class="score">{$score/value/text()}</div>
+     <div class="name">{$name}</div>
+     <div class="score">{$score/text()}</div>
     </li>
   }</ol>
 

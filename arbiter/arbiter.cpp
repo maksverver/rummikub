@@ -101,6 +101,7 @@ void run_game(std::ostream &xscr, const TileList &tiles, Player (&players)[4])
               "</pool>\n"
             " </setup>\n\n" << std::flush;
 
+    xscr << " <turns>\n";
     int turn_no = 0;
     while (!gs.is_game_over())
     {
@@ -118,7 +119,7 @@ void run_game(std::ostream &xscr, const TileList &tiles, Player (&players)[4])
         bool ok = rpc_move(pl.url.c_str(), pl.post, rpc_timeout, gs, response);
         delay = now() - delay;
 
-        xscr << " <turn no='" << turn_no << "' player='"
+        xscr << "  <turn no='" << turn_no << "' player='"
              << gs.next_player + 1 << "' rpc-delay='" << delay << "s'>\n";
 
         if (!ok)
@@ -148,53 +149,36 @@ void run_game(std::ostream &xscr, const TileList &tiles, Player (&players)[4])
             Tile drawn(0);
             if (gs.draw(&drawn))
             {
-                xscr << "  <drawn>" << drawn << "</drawn>\n"
-                     << "  <pool size='" << gs.pool_tiles.size() << "'/>\n";
+                xscr << "   <drawn>" << drawn << "</drawn>\n"
+                     << "   <pool size='" << gs.pool_tiles.size() << "'/>\n";
             }
             else
             if (gs.pass())
             {
-                xscr << "  <pass count='" << gs.pass_count << "'/>\n";
+                xscr << "   <pass count='" << gs.pass_count << "'/>\n";
             }
         }
         else
         {
-            xscr << "  <played>" << played_tiles << "</played>\n"
+            xscr << "   <played>" << played_tiles << "</played>\n"
                     "  <table>" << new_table << "</table>\n";
         }
 
-        xscr << "  <tiles value='" << total_value(tiles) << "'>"
+        xscr << "   <tiles value='" << total_value(tiles) << "'>"
              << tiles << "</tiles>\n";
 
         if (!error.empty())
         {
-            xscr << "  <error>" << error << "</error>\n";
-            xscr << "  <response><![CDATA[" << response << "]]></response>\n";
+            xscr << "   <error>" << error << "</error>\n";
+            xscr << "   <response><![CDATA[" << response << "]]></response>\n";
         }
 
-        xscr << " </turn>\n" << std::flush;
+        xscr << "  </turn>\n" << std::flush;
     }
-
-    xscr << "\n <scores>\n";
-    {
-        std::pair<int, int> score_player[4];
-        for (int i = 0; i < 4; ++i)
-        {
-            score_player[i].first  = gs.score(i);
-            score_player[i].second = i;
-        }
-        std::sort(score_player, score_player + 4);
-        for (int i = 0; i < 4; ++i)
-        {
-            int v = score_player[i].first;
-            int p = score_player[i].second;
-            xscr << "  <score>\n"
-                    "    <player id='" << p + 1 << "'>" << players[p].name <<
-                        "</player>\n"
-                    "    <value>" << v << "</value>\n"
-                    "  </score>\n";
-        }
-    }
+    xscr << " </turns>\n\n"
+            " <scores>\n";
+    for (int i = 0; i < 4; ++i)
+        xscr << "  <score player='" << i + 1 << "'>" << gs.score(i) << "</score>\n";
     xscr << " </scores>\n"
          << "</rummikub-transcript>\n" << std::flush;
 }
