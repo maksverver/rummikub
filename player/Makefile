@@ -1,13 +1,16 @@
 CC=gcc
 CFLAGS=-g -Wall -Wextra -O2
 
-PLAYER_OBJS=player.o
+# cross-compile for server:
+CFLAGS+=-m32 -march=i686
+
+PLAYER_OBJS=calc.o data.o main.o play.o
 EXECUTABLES=player
 
 all: $(EXECUTABLES)
 
 player: $(PLAYER_OBJS)
-	$(CC) $(LDFLAGS) -o $@ $(PLAYER_OBJS) $(LDLIBS)
+	$(CC) $(CFLAGS) $(LDFLAGS) -o $@ $(PLAYER_OBJS) $(LDLIBS)
 
 clean:
 	rm -f *.o

@@ -1,19 +1,10 @@
-#include <assert.h>
-#include <stdio.h>
-#include <stdbool.h>
-#include <stdlib.h>
-#include <string.h>
-
-/* Game parameters: */
-#define V   13        /* number of tile values */
-#define C    4        /* number of tile colors */
-#define K    2        /* number of duplicates of each tile */
+#include "player.h"
 
 /* Convenience macros: */
 #define FOR(i, a, b) for(i = a; i < b; ++i)
 #define REP(i, n) FOR(i, 0, n)
 
-typedef int TileSet[V][C];
+static const int inf = 999999999;
 
 typedef struct CalcState
 {
@@ -22,40 +13,7 @@ typedef struct CalcState
     int     grps[C];            /* #tiles assigned to groups (per color) */
 } CalcState;
 
-typedef struct GameState
-{
-    TileSet tiles;                  /* tiles on my rack */
-    TileSet table;                  /* tiles on the table */
-    int     pool_size;              /* number of tiles left in the pool */
-    int     opponents_tiles[3];     /* number of tiles my opponents have left */
-} GameState;
-
-
-enum SetType { RUN, GROUP };
-
-typedef struct Run      { int color, start, length; } Run;
-typedef struct Group    { int value, color_mask; } Group;
-
-typedef struct Set
-{
-    struct Set *next;
-    enum SetType type;
-    union {
-        Run   run;
-        Group group;
-    };
-} Set;
-
-static const char *colors = "RGBK";
-static const int inf = 999999999;
-
-static int total_value(TileSet set)
-{
-    int res = 0, v, c;
-    REP(v, V) REP(c, C) res += (v + 1)*set[v][c];
-    return res;
-}
-
+/* Computes the memo key for the given (partial) computation state: */
 static int get_memo_key(const int lens[C][K], int cur_v)
 {
     int res = 0, c, k;
@@ -230,109 +188,6 @@ static bool reconstruct_for_v( const GameState *gs, CalcState *cs,
     }
 }
 
-static Set *alloc_group(int value, int color_mask, Set *next)
-{
-    Set *res = malloc(sizeof(Set));
-    assert(res != NULL);
-    res->next = next;
-    res->type = GROUP;
-    res->group.value = value;
-    res->group.color_mask = color_mask;
-    return res;
-}
-
-static Set *alloc_run(int color, int start, int length, Set *next)
-{
-    Set *res = malloc(sizeof(Set));
-    assert(res != NULL);
-    res->next = next;
-    res->type = RUN;
-    res->run.color  = color;
-    res->run.start  = start;
-    res->run.length = length;
-    return res;
-}
-
-static void print_tile(int value, int color, FILE *fp)
-{
-    fprintf(fp, "%c%d", colors[color], value + 1);
-}
-
-static void print_set(Set *set, FILE *fp)
-{
-    switch (set->type)
-    {
-    case RUN:
-        {
-            int i;
-            for (i = 0; i < set->run.length; ++i)
-            {
-                if (i > 0) fputc('.', fp);
-                print_tile(set->run.start + i, set->run.color, fp);
-            }
-        } break;
-
-    case GROUP:
-        {
-            bool first = true;
-            int c;
-            REP(c, C) if (set->group.color_mask & (1 << c)) {
-                if (!first) fputc('.', fp);
-                print_tile(set->group.value, c, fp);
-                first = false;
-            }
-        } break;
-
-    default: assert(0);
-    }
-}
-
-static void print_table(Set *set, FILE *fp)
-{
-    for ( ; set != NULL; set = set->next)
-    {
-        print_set(set, fp);
-        if (set->next) fputc('-', fp);
-    }
-}
-
-static int bitcount(int i)
-{
-    int res = 0;
-    for ( ; i; i &= i - 1) ++res;
-    return res;
-}
-
-static int set_value(Set *set)
-{
-    switch (set->type)
-    {
-    case RUN:
-        return set->run.length*(2*set->run.start + set->run.length + 1)/2;
-    case GROUP:
-        return bitcount(set->group.color_mask)*(set->group.value + 1);
-    }
-    assert(0);
-    return -1;
-}
-
-static int table_value(Set *set)
-{
-    int res = 0;
-    for ( ; set != NULL; set = set->next) res += set_value(set);
-    return res;
-}
-
-static void free_table(Set *set)
-{
-    while (set != NULL)
-    {
-        Set *next = set->next;
-        free(set);
-        set = next;
-    }
-}
-
 static Set *make_groups(int value, int grps[C], Set *list)
 {
     assert(C == 4);  /* this function doesn't generalize! */
@@ -416,7 +271,7 @@ static Set *reconstruct(const GameState *gs, int memo[], int value)
     return list;
 }
 
-static int max_value(const GameState *gs, Set **table)
+int max_value(const GameState *gs, Set **table)
 {
     static int *memo;
     CalcState cs;
@@ -424,9 +279,9 @@ static int max_value(const GameState *gs, Set **table)
     int value;
 
     /* Initialize memo: */
-    memo = malloc(sizeof(int)*memo_size);
+    memo = malloc(sizeof(*memo)*memo_size);
     assert(memo != NULL);
-    memset(memo, -1, sizeof(int)*memo_size);
+    memset(memo, -1, sizeof(*memo)*memo_size);
 
     /* Fill memo recursively: */
     memset(&cs, 0, sizeof(cs));
@@ -443,110 +298,4 @@ static int max_value(const GameState *gs, Set **table)
     free(memo);
 
     return value;
-}
-
-/*
-    CGI interface follows:
-*/
-
-static void parse_tiles(char *str, TileSet set)
-{
-    char *tok, *ptr;
-
-    memset(set, 0, sizeof(TileSet));
-    for (tok = strtok_r(str, ".-", &ptr); tok; tok = strtok_r(NULL, ".-", &ptr))
-    {
-        char *p = strchr(colors, tok[0]);
-        int v = atoi(tok + 1) - 1, c = p ? p - colors : -1;
-        if (v >= 0 && v < V && c >= 0 && c < C && set[v][c] < K) ++set[v][c];
-    }
-}
-
-static void parse_query(char *query, GameState *gs)
-{
-    char *key, *val, *ptr;
-
-    memset(gs, 0, sizeof(GameState));
-    for (key = strtok_r(query, "=", &ptr); key; key = strtok_r(NULL, "=", &ptr))
-    {
-        if ((val = strtok_r(NULL, "&;", &ptr)) != NULL)
-        {
-            if (strcmp(key, "yourTiles") == 0)
-                parse_tiles(val, gs->tiles);
-            if (strcmp(key, "table") == 0)
-                parse_tiles(val, gs->table);
-            if (strcmp(key, "poolTiles") == 0)
-                gs->pool_size = atoi(val);
-            if (strcmp(key, "opponentsTiles") == 0)
-                sscanf(val, "%d.%d.%d", &gs->opponents_tiles[0],
-                    &gs->opponents_tiles[1], &gs->opponents_tiles[2]);
-        }
-    }
-}
-
-static bool parse_cgi_args(const char *method, GameState *gs)
-{
-    char buf[1024];
-
-    if (strcmp(method, "GET") == 0)
-    {
-        const char *qs = getenv("QUERY_STRING");
-        if (qs == NULL || qs[0] == '\0')
-        {
-            fprintf(stderr, "No/empty query string received.\n");
-            return false;
-        }
-        strncpy(buf, qs, sizeof(buf) - 1);
-        buf[sizeof(buf) - 1] = '\n';
-    }
-    else
-    if (strcmp(method, "POST") == 0)
-    {
-        if (!fgets(buf, sizeof(buf), stdin) || buf[0] == '\0')
-        {
-            fprintf(stderr, "No/empty request body received.\n");
-            return false;
-        }
-    }
-    else
-    {
-        fprintf(stderr, "Invalid request method received (%s).\n", method);
-        return false;
-    }
-
-    parse_query(buf, gs);
-    return true;
-}
-
-int main(int argc, char *argv[])
-{
-    const char *method;
-    GameState gs;
-    Set *new_table;
-    int new_value;
-
-    if ((method = getenv("REQUEST_METHOD")) != NULL)
-    {
-        /* Use CGI interface: */
-        if (!parse_cgi_args(method, &gs)) return 1;
-        printf("Content-Type: text/plain\n\n");
-    }
-    else
-    {
-        /* Use command-line interface: */
-        if (argc != 2)
-        {
-            fprintf(stderr, "Usage: player <query>\n");
-            return 1;
-        }
-        parse_query(argv[1], &gs);
-    }
-    new_value = max_value(&gs, &new_table);
-    if (new_value > total_value(gs.table))
-        print_table(new_table, stdout);
-    else
-        fputs("draw", stdout);
-    putc('\n', stdout);
-    free_table(new_table);
-    return 0;
 }
