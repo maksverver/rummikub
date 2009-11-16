@@ -4,7 +4,7 @@
 #define FOR(i, a, b) for(i = a; i < b; ++i)
 #define REP(i, n) FOR(i, 0, n)
 
-static const int inf = 999999999;
+static const short inf = 32767;  /* stored in memo, so must be short! */
 
 typedef struct CalcState
 {
@@ -14,9 +14,10 @@ typedef struct CalcState
 } CalcState;
 
 /* Computes the memo key for the given (partial) computation state: */
-static int get_memo_key(const int lens[C][K], int cur_v)
+static size_t get_memo_key(const int lens[C][K], int cur_v)
 {
-    int res = 0, c, k;
+    size_t res = 0;
+    int c, k;
 
     REP(c, C) REP(k, K) res = 4*res + lens[c][k];
     res = V*res + cur_v;
@@ -59,7 +60,7 @@ static bool can_group(const int tiles[C])
 
     assert(C == 4);  /* this function doesn't generalize! */
 
-    /* Can't make groups with exactly 1, 2 or 5 tiles. */
+    /* Can't make groups with exactly 1, 2 or 5 tiles: */
     REP(c, C) total += tiles[c];
     if (total == 1 || total == 2 || total == 5) return false;
 
@@ -70,14 +71,15 @@ static bool can_group(const int tiles[C])
     return true;    /* CHECKME: is this always correct? */
 }
 
-static int calc( const GameState *gs, const CalcState *cs, int memo[],
+static int calc( const GameState *gs, const CalcState *cs, short memo[],
                  int cur_v, int cur_c )
 {
+    CalcState new_cs;
+    int res = -inf, c;
+    short *mem = (cur_c == 0) ? &memo[get_memo_key(cs->lens, cur_v)] : NULL;
+
     if (cur_c == C)  /* at end of current value */
     {
-        CalcState new_cs;
-        int c;
-
         if (!can_group(cs->grps)) return -inf;
 
         /* Discard grouped tiles and move on to next value: */
@@ -85,24 +87,19 @@ static int calc( const GameState *gs, const CalcState *cs, int memo[],
         REP(c, C) new_cs.grps[c] = 0;
         return calc(gs, &new_cs, memo, cur_v + 1, 0);
     }
-    else
-    if (cur_v == V)  /* at end of tiles */
-    {
-        int c;
 
+    if (mem != NULL && *mem != -1) return *mem;
+
+    if (cur_v == V)
+    {
         /* Check for unfinished runs: */
-        REP(c, C) if (get_min_extended_runs(cs->lens[c]) > 0) return -inf;
-
-        return 0;
+        res = 0;
+        REP(c, C) if (get_min_extended_runs(cs->lens[c]) > 0) res = -inf;
     }
-    else
+    else  /* cur_v < V */
     {
-        int *mem = (cur_c == 0) ? &memo[get_memo_key(cs->lens, cur_v)] : NULL;
-        int res, min_use, max_use, min_run, use, in_run, val;
+        int min_use, max_use, min_run, use, in_run, val;
 
-        if (mem != NULL && *mem != -1) return *mem;
-
-        res = -inf;
         min_use = gs->table[cur_v][cur_c];
         max_use = gs->table[cur_v][cur_c] + gs->tiles[cur_v][cur_c];
         min_run = get_min_extended_runs(cs->lens[cur_c]);
@@ -114,7 +111,7 @@ static int calc( const GameState *gs, const CalcState *cs, int memo[],
             for (in_run = min_run; in_run <= use; ++in_run)
             {
                 /* Calculate updated state: */
-                CalcState new_cs = *cs;
+                new_cs = *cs;
                 extend_runs(new_cs.lens[cur_c], in_run);
                 assert(new_cs.grps[cur_c] == 0);
                 new_cs.grps[cur_c] = use - in_run;
@@ -125,18 +122,18 @@ static int calc( const GameState *gs, const CalcState *cs, int memo[],
                 if (val > res) res = val;
             }
         }
-
-        if (res < 0) res = -inf;
-        if (mem != NULL) *mem = res;
-        return res;
     }
+
+    if (res < 0) res = -inf;
+    if (mem != NULL) *mem = res;
+    return res;
 }
 
 /* Figures out the optimal assignment of tiles of a fixed value (`cur_v') and
    return true, leaving the assignment in `cs'. When called with cur_c == 0 and
    a valid memo and value, this function should always return true. */
 static bool reconstruct_for_v( const GameState *gs, CalcState *cs,
-                               int memo[], int cur_v, int cur_c, int *value )
+                               short memo[], int cur_v, int cur_c, int *value )
 {
     if (cur_c == C)
     {
@@ -144,14 +141,13 @@ static bool reconstruct_for_v( const GameState *gs, CalcState *cs,
 
         /* Valid configuration; check if this is optimal: */
         {
-            int mem = (cur_v + 1 < V) ?
-                memo[get_memo_key((const int(*)[K])cs->lens, cur_v + 1) ] : 0;
-            assert(mem != -1);      /* memo entry must be set! */
-            assert(mem <= *value);  /* value is expected to be optimal */
-            return mem == *value;
+            short v = memo[get_memo_key((const int(*)[K])cs->lens, cur_v + 1)];
+            assert(v != -1);      /* memo entry must be set! */
+            assert(v <= *value);  /* value is expected to be optimal */
+            return v == *value;
         }
     }
-    else
+    else  /* cur_c < C */
     {
         int min_use, max_use, min_run, use, in_run;
         int old_lens[K], k;
@@ -252,7 +248,7 @@ static Set *make_runs(int value, int color, Set *runs[K], int cnt, Set *list)
     return list;
 }
 
-static Set *reconstruct(const GameState *gs, int memo[], int value)
+static Set *reconstruct(const GameState *gs, short memo[], int value)
 {
     CalcState cs;
     Set *list = NULL;
@@ -273,9 +269,9 @@ static Set *reconstruct(const GameState *gs, int memo[], int value)
 
 int max_value(const GameState *gs, Set **table)
 {
-    static int *memo;
+    size_t memo_size = (V + 1)*(1<<(2*C*K));
+    short *memo;
     CalcState cs;
-    size_t memo_size = V*(1<<(2*C*K));
     int value;
 
     /* Initialize memo: */
