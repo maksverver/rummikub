@@ -47,7 +47,7 @@ static bool parse_cgi_args(const char *method, GameState *gs)
         const char *qs = getenv("QUERY_STRING");
         if (qs == NULL || qs[0] == '\0')
         {
-            fprintf(stderr, "No/empty query string received.\n");
+            printf("No/empty query string received.\n");
             return false;
         }
         strncpy(buf, qs, sizeof(buf) - 1);
@@ -58,13 +58,13 @@ static bool parse_cgi_args(const char *method, GameState *gs)
     {
         if (!fgets(buf, sizeof(buf), stdin) || buf[0] == '\0')
         {
-            fprintf(stderr, "No/empty request body received.\n");
+            printf("No/empty request body received.\n");
             return false;
         }
     }
     else
     {
-        fprintf(stderr, "Invalid request method received (%s).\n", method);
+        printf("Invalid request method received (%s).\n", method);
         return false;
     }
 
@@ -129,8 +129,8 @@ int main(int argc, char *argv[])
     if ((method = getenv("REQUEST_METHOD")) != NULL)
     {
         /* Use CGI interface: */
-        if (!parse_cgi_args(method, &gs)) return 1;
         printf("Content-Type: text/plain\n\n");
+        if (!parse_cgi_args(method, &gs)) return 1;
     }
     else
     {
