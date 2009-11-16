@@ -224,9 +224,8 @@ static Set *make_runs(int value, int color, Set *runs[K], int cnt, Set *list)
 
     /* Bubble-sort existing runs by length (increasing): */
     REP(i, K) FOR(j, i + 1, K) {
-        int li = runs[i] != NULL ? runs[i]->run.length : inf;
-        int lj = runs[j] != NULL ? runs[j]->run.length : inf;
-        if (li > lj)
+        if ( (runs[i] ? runs[i]->run.length : inf) >
+             (runs[j] ? runs[j]->run.length : inf) )
         {
             Set *tmp = runs[i];
             runs[i] = runs[j];

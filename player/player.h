@@ -22,21 +22,15 @@ typedef struct GameState
     int     opponents_tiles[3];     /* number of tiles my opponents have left */
 } GameState;
 
-enum SetType { RUN, GROUP };
-
-typedef struct Run      { int color, start, length; } Run;
-typedef struct Group    { int value, color_mask; } Group;
-
 typedef struct Set
 {
     struct Set *next;
-    enum SetType type;
+    enum SetType { RUN, GROUP } type;
     union {
-        Run   run;
-        Group group;
+        struct Run   { int color, start, length; } run;
+        struct Group { int value, color_mask;    } group;
     };
 } Set;
-
 
 /* Utility functions to allocate/free data structure: */
 Set *alloc_group(int value, int color_mask, Set *next);

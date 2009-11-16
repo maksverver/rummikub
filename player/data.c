@@ -40,23 +40,21 @@ static int bitcount(int i)
     return res;
 }
 
-static int set_value(Set *set)
-{
-    switch (set->type)
-    {
-    case RUN:
-        return set->run.length*(2*set->run.start + set->run.length + 1)/2;
-    case GROUP:
-        return bitcount(set->group.color_mask)*(set->group.value + 1);
-    }
-    assert(0);
-    return -1;
-}
-
 int table_value(Set *set)
 {
     int res = 0;
-    for ( ; set != NULL; set = set->next) res += set_value(set);
+    for ( ; set != NULL; set = set->next)
+    {
+        switch (set->type)
+        {
+        case RUN:
+            res += set->run.length*(2*set->run.start + set->run.length + 1)/2;
+            break;
+        case GROUP:
+            res += bitcount(set->group.color_mask)*(set->group.value + 1);
+            break;
+        }
+    }
     return res;
 }
 
