@@ -1,7 +1,9 @@
 #!/bin/sh
 
-QUERY='yourTiles=R13&table=R3.R4.R5.R6.R7.R8.R9.R10.R11.R12&opponentsTiles=14.14.14&poolTiles=51'
-RESPONSE='R3.R4.R5.R6.R7.R8.R9.R10.R11.R12.R13'
+QUERY='yourTiles=R13&table=R9.R10.R11.R12&opponentsTiles=14.14.14&poolTiles=57'
+RESPONSE='R9.R10.R11.R12.R13'
+
+FAILED=0
 
 for FILE in $@
 do
@@ -12,6 +14,11 @@ do
 		NAME=`head -1 "$FILE" | tail -1`
 		URL=`head -2 "$FILE" | tail -1`
 		METHOD=`head -3 "$FILE" | tail -1`
+
+		if [ "$NAME" != "`basename "$FILE"`" ]
+		then
+			echo "WARNING: player name $NAME does not match filename $FILE!"
+		fi
 
 		if [ "$METHOD" = POST ]
 		then
@@ -32,8 +39,13 @@ do
 			echo "Ok."
 		else
 			echo "Failed!"
-			echo "[$RESPONSE]"
-			echo "[$res]"
+			echo "Expected: '$RESPONSE'"
+			echo "Received: '$res'"
+			FAILED=`expr $FAILED + 1`
 		fi
 	fi
 done
+
+exit $FAILED
+
+exit $EXIT

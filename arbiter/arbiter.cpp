@@ -11,21 +11,7 @@
 #include <fcntl.h>
 #include <unistd.h>
 
-#if 0
-static std::ostream &operator<<(std::ostream &os, const GameState &gs)
-{
-    os << "Next player: " << gs.next_player + 1 << '\n';
-    for (int player = 0; player < 4; ++player)
-    {
-        os << "Player " << player + 1 << ": " << gs.player_tiles[player] << '\n';
-    }
-    os << "Table: " << gs.table_tiles << '\n';
-    os << "Pool: " << gs.pool_tiles << '\n';
-    return os;
-}
-#endif
-
-static const int rpc_timeout = 10;  // seconds
+static const int rpc_timeout = 5 + 2;  // seconds
 
 struct Player
 {

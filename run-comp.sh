@@ -4,7 +4,7 @@ BASEPATH=`readlink -f "$0"`
 BASEDIR=`dirname "$BASEPATH"`
 ARBITER="$BASEDIR"/arbiter/arbiter
 GENTILES="$BASEDIR"/gen-tiles.py
-GENHTML="$BASEDIR"/transcript-to-html.sh
+TESTPLAYERS="$BASEDIR"/test-players.sh
 
 DIR=$1
 
@@ -21,6 +21,11 @@ then
 fi
 
 mkdir -p tiles results
+
+if ! "$TESTPLAYERS" players/*
+then
+	echo "$? players failed!"
+fi
 
 for match in matches/*
 do
@@ -41,30 +46,22 @@ do
 			if [ ! -s "$tiles" ]
 			then
 				echo "Generating $tiles..."
-				$GENTILES > "$tiles"
+				"$GENTILES" > "$tiles"
 			fi
 
 			# Determine players in this match:
-			P1=`cut -f1 "$match"`
-			P2=`cut -f2 "$match"`
-			P3=`cut -f3 "$match"`
-			P4=`cut -f4 "$match"`
-			if [ -z "$P1" -o -z "$P2" -o -z "$P3" -o -z "$P4" ]
+			P1=players/`cut -f1 "$match"`
+			P2=players/`cut -f2 "$match"`
+			P3=players/`cut -f3 "$match"`
+			P4=players/`cut -f4 "$match"`
+			echo "Running match $name with $P1, $P2, $P3 and $P4..."
+			tmp=`tempfile -m 0644`
+			if ! "$ARBITER" "$P1" "$P2" "$P3" "$P4" "$tiles" > "$tmp"
 			then
-				echo "Invalid match: $match!"
+				cat "$tmp"    # show arbiter error message
+				rm -f "$tmp"
 			else
-				echo "Running match $name with $P1, $P2, $P3 and $P4..."
-				P1=players/"$P1"
-				P2=players/"$P2"
-				P3=players/"$P3"
-				P4=players/"$P4"
-				tmp=`tempfile -m 0644`
-				if $ARBITER "$P1" "$P2" "$P3" "$P4" "$tiles" > "$tmp"
-				then
-					mv "$tmp" "$xml"
-					echo "Generating HTML..."
-					$GENHTML "$xml" > "$html"
-				fi
+				mv "$tmp" "$xml"
 			fi
 		fi
 
