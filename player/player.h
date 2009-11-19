@@ -3,9 +3,16 @@
 
 /* Common header files: */
 #include <assert.h>
-#include <stdbool.h>
 #include <stdlib.h>
 #include <string.h>
+#ifndef _WIN32  /* POSIX */
+#include <stdbool.h>
+#else  /* Windows */
+typedef unsigned char bool;
+#define true  1
+#define false 0
+char *strtok_r(char *s, const char *sep, char **save);
+#endif
 
 /* Game parameters: */
 #define V   13        /* number of tile values */
