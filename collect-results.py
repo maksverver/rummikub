@@ -4,7 +4,7 @@ import elementtree.ElementTree as ET
 import sys, os.path, glob
 
 # some hard-coded constants: (ugly)
-url_prefix='http://hell.student.utwente.nl/rummikub/transcripts/comp1/'
+url_prefix='http://hell.student.utwente.nl/rummikub/transcripts/comp2/'
 
 class Score:
     def __init__(self, name, points, failures, delays):
