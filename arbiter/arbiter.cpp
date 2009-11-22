@@ -8,8 +8,12 @@
 #include <string>
 #include <utility>
 
+#ifndef _WIN32  /* POSIX */
 #include <fcntl.h>
 #include <unistd.h>
+#else  /* Windows */
+#include <windows.h>
+#endif
 
 static const int rpc_timeout = 5 + 2;  // seconds
 
@@ -27,18 +31,30 @@ public:
     FileLock(int fd) : fd_(fd) { lock(true); }
     ~FileLock() { lock(false);  }
 private:
-    void lock(bool lock) {
+    void lock(bool lock)
+	{
+#ifndef _WIN32  /* POSIX */
         if (lockf(fd_, lock ? F_LOCK : F_ULOCK, 0) != 0)
             perror("lockf() failed");
+#endif  /* not supported on Windows! */
     }
     int fd_;
 };
 
 double now()
 {
+#ifndef _WIN32  /* POSIX */
     struct timespec tp = { 0, 0 };
     clock_gettime(CLOCK_MONOTONIC, &tp);
     return tp.tv_sec + tp.tv_nsec/1e9;
+#else  /* Windows */
+    FILETIME filetime;
+    GetSystemTimeAsFileTime(&filetime);
+    ULARGE_INTEGER largeint;
+    largeint.LowPart  = filetime.dwLowDateTime;
+    largeint.HighPart = filetime.dwHighDateTime;
+    return largeint.QuadPart*1e-7;
+#endif
 }
 
 bool load_player(const char *path, Player &player)
@@ -51,8 +67,10 @@ bool load_player(const char *path, Player &player)
     if (line == "GET")  player.post = false; else
     if (line == "POST") player.post = true; else return false;
     if (!ifs) return false;
+#ifndef _WIN32  /* POSIX */
     player.fd = open(path, O_RDWR);
     if (player.fd < 0) return false;
+#endif
     return true;
 }
 
