@@ -8,7 +8,7 @@ TESTPLAYERS="$BASEDIR"/test-players.sh
 
 DIR=$1
 
-if [ -z "DIR" ]
+if [ -z "$DIR" ]
 then
 	echo "Usage: $0 <dir>"
 	exit 0
@@ -22,10 +22,11 @@ fi
 
 mkdir -p tiles results
 
-if ! "$TESTPLAYERS" players/*
-then
-	echo "$? players failed!"
-fi
+#if ! "$TESTPLAYERS" players/*
+#then
+#	echo "$? players failed!"
+#	exit 1
+#fi
 
 for match in matches/*
 do

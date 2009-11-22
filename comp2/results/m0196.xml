@@ -1,0 +1,331 @@
+<?xml version='1.0' encoding='UTF-8' ?><rummikub-transcript>
+ <setup>
+  <players>
+   <player id='1'>
+    <name>GuidoH</name>
+    <url>http://www.guidohendriks.nl/got/rummikub/</url>
+    <method>POST</method>
+    <tiles>R12.G1.R13.K8.G1.B3.B4.R1.G9.R1.G5.K12.R10.K6</tiles>
+   </player>
+   <player id='2'>
+    <name>jfeitsma</name>
+    <url>http://stig.home.fmf.nl/rummy/testplayer.cgi</url>
+    <method>GET</method>
+    <tiles>R6.B13.B6.G6.B10.B3.B11.G12.G3.G4.B7.G9.R6.K9</tiles>
+   </player>
+   <player id='3'>
+    <name>bat266</name>
+    <url>http://212.187.65.162:8080/Rummicub/doIt</url>
+    <method>GET</method>
+    <tiles>G12.B7.B8.K5.R8.K5.B12.K10.R11.K11.B6.R9.K3.R3</tiles>
+   </player>
+   <player id='4'>
+    <name>EdwinG</name>
+    <url>http://typefreak.nl/rummikub/basic.php</url>
+    <method>POST</method>
+    <tiles>R9.K13.B8.R10.K7.G6.K2.K4.R8.G11.K10.R7.G5.R5</tiles>
+   </player>
+  </players>
+  <pool size='48'>G10.B4.B5.K1.R4.B2.K1.B9.B9.K7.G8.G7.K9.K12.G4.R2.B11.B1.G2.G8.R11.G13.R3.R4.R13.G7.K6.K13.G2.B2.K8.B1.B10.K3.R5.R12.K11.G11.R2.G13.K4.G3.R7.B12.B13.G10.K2.B5</pool>
+ </setup>
+
+ <turns>
+  <turn no='1' player='1' rpc-delay='0.0138668s'>
+   <drawn>G10</drawn>
+   <pool size='47'/>
+   <tiles value='96'>R12.G1.R13.K8.G1.B3.B4.R1.G9.R1.G5.K12.R10.K6.G10</tiles>
+  </turn>
+  <turn no='2' player='2' rpc-delay='4.70648s'>
+   <played>R6.G6.B6</played>
+  <table>R6.G6.B6</table>
+   <tiles value='87'>B13.B10.B3.B11.G12.G3.G4.B7.G9.R6.K9</tiles>
+  </turn>
+  <turn no='3' player='3' rpc-delay='0.0369346s'>
+   <played>B6.B7.B8</played>
+  <table>B6.B7.B8-R6.G6.B6</table>
+   <tiles value='89'>G12.K5.R8.K5.B12.K10.R11.K11.R9.K3.R3</tiles>
+  </turn>
+  <turn no='4' player='4' rpc-delay='0.0225073s'>
+   <played>R7.R8.R9.R10</played>
+  <table>B6.B7.B8-R6.G6.B6-R7.R8.R9.R10</table>
+   <tiles value='71'>K13.B8.K7.G6.K2.K4.G11.K10.G5.R5</tiles>
+  </turn>
+  <turn no='5' player='1' rpc-delay='0.0126458s'>
+   <played>K6</played>
+  <table>B6.B7.B8-R6.G6.B6.K6-R7.R8.R9.R10</table>
+   <tiles value='90'>R12.G1.R13.K8.G1.B3.B4.R1.G9.R1.G5.K12.R10.G10</tiles>
+  </turn>
+  <turn no='6' player='2' rpc-delay='4.74814s'>
+   <played>R6</played>
+  <table>R6.R7.R8.R9.R10-B6.B7.B8-R6.G6.B6.K6</table>
+   <tiles value='81'>B13.B10.B3.B11.G12.G3.G4.B7.G9.K9</tiles>
+  </turn>
+  <turn no='7' player='3' rpc-delay='0.0427804s'>
+   <played>R11</played>
+  <table>R6.R7.R8.R9.R10.R11-B6.B7.B8-R6.G6.B6.K6</table>
+   <tiles value='78'>G12.K5.R8.K5.B12.K10.K11.R9.K3.R3</tiles>
+  </turn>
+  <turn no='8' player='4' rpc-delay='0.0272715s'>
+   <played>R5</played>
+  <table>R5.R6.R7.R8.R9.R10.R11-B6.B7.B8-R6.G6.B6.K6</table>
+   <tiles value='66'>K13.B8.K7.G6.K2.K4.G11.K10.G5</tiles>
+  </turn>
+  <turn no='9' player='1' rpc-delay='0.0128955s'>
+   <played>R10.R12.R13</played>
+  <table>R5.R6.R7.R8.R9.R10-B6.B7.B8-R6.G6.B6.K6-R10.R11.R12.R13</table>
+   <tiles value='55'>G1.K8.G1.B3.B4.R1.G9.R1.G5.K12.G10</tiles>
+  </turn>
+  <turn no='10' player='2' rpc-delay='4.61827s'>
+   <drawn>B4</drawn>
+   <pool size='46'/>
+   <tiles value='85'>B13.B10.B3.B11.G12.G3.G4.B7.G9.K9.B4</tiles>
+  </turn>
+  <turn no='11' player='3' rpc-delay='0.0586511s'>
+   <played>R8.R9</played>
+  <table>R5.R6.R7.R8.R9.R10-B6.B7.B8-R6.G6.B6.K6-R8.R9.R10.R11.R12.R13</table>
+   <tiles value='61'>G12.K5.K5.B12.K10.K11.K3.R3</tiles>
+  </turn>
+  <turn no='12' player='4' rpc-delay='0.0229492s'>
+   <drawn>B5</drawn>
+   <pool size='45'/>
+   <tiles value='71'>K13.B8.K7.G6.K2.K4.G11.K10.G5.B5</tiles>
+  </turn>
+  <turn no='13' player='1' rpc-delay='0.0128084s'>
+   <drawn>K1</drawn>
+   <pool size='44'/>
+   <tiles value='56'>G1.K8.G1.B3.B4.R1.G9.R1.G5.K12.G10.K1</tiles>
+  </turn>
+  <turn no='14' player='2' rpc-delay='4.64545s'>
+   <played>G9.K9</played>
+  <table>R8.R9.R10-R5.R6.R7.R8-R10.R11.R12.R13-B6.B7.B8-R6.G6.B6.K6-R9.G9.K9</table>
+   <tiles value='67'>B13.B10.B3.B11.G12.G3.G4.B7.B4</tiles>
+  </turn>
+  <turn no='15' player='3' rpc-delay='0.0370182s'>
+   <drawn>R4</drawn>
+   <pool size='43'/>
+   <tiles value='65'>G12.K5.K5.B12.K10.K11.K3.R3.R4</tiles>
+  </turn>
+  <turn no='16' player='4' rpc-delay='0.022257s'>
+   <played>B5</played>
+  <table>R8.R9.R10-R5.R6.R7.R8-R10.R11.R12.R13-B5.B6.B7.B8-R6.G6.B6.K6-R9.G9.K9</table>
+   <tiles value='66'>K13.B8.K7.G6.K2.K4.G11.K10.G5</tiles>
+  </turn>
+  <turn no='17' player='1' rpc-delay='0.0202472s'>
+   <played>R1.G1.B3.B4.K1</played>
+  <table>R8.R9.R10-R5.R6.R7.R8-R10.R11.R12.R13-B3.B4.B5.B6.B7.B8-R6.G6.B6.K6-R9.G9.K9-R1.G1.K1</table>
+   <tiles value='46'>K8.G1.G9.R1.G5.K12.G10</tiles>
+  </turn>
+  <turn no='18' player='2' rpc-delay='5.0295s'>
+   <played>B7</played>
+  <table>R8.R9.R10-R5.R6.R7.R8-R10.R11.R12.R13-B6.B7.B8-B3.B4.B5.B6.B7-R1.G1.K1-R6.G6.K6-R9.G9.K9</table>
+   <tiles value='60'>B13.B10.B3.B11.G12.G3.G4.B4</tiles>
+  </turn>
+  <turn no='19' player='3' rpc-delay='0.0437885s'>
+   <played>R3.R4</played>
+  <table>R8.R9.R10-R3.R4.R5.R6.R7.R8-R10.R11.R12.R13-B6.B7.B8-B3.B4.B5.B6.B7-R1.G1.K1-R6.G6.K6-R9.G9.K9</table>
+   <tiles value='58'>G12.K5.K5.B12.K10.K11.K3</tiles>
+  </turn>
+  <turn no='20' player='4' rpc-delay='0.103577s'>
+   <played>B8</played>
+  <table>R8.R9.R10-R3.R4.R5.R6.R7.R8-R10.R11.R12.R13-B6.B7.B8-B3.B4.B5.B6.B7.B8-R1.G1.K1-R6.G6.K6-R9.G9.K9</table>
+   <tiles value='58'>K13.K7.G6.K2.K4.G11.K10.G5</tiles>
+  </turn>
+  <turn no='21' player='1' rpc-delay='0.0133279s'>
+   <drawn>B2</drawn>
+   <pool size='42'/>
+   <tiles value='48'>K8.G1.G9.R1.G5.K12.G10.B2</tiles>
+  </turn>
+  <turn no='22' player='2' rpc-delay='4.54767s'>
+   <played>G3.G4.B3.B4</played>
+  <table>R8.R9.R10-R5.R6.R7.R8-R10.R11.R12.R13-B3.B4.B5-B6.B7.B8-B6.B7.B8-R1.G1.K1-R3.G3.B3-R4.G4.B4-R6.G6.K6-R9.G9.K9</table>
+   <tiles value='46'>B13.B10.B11.G12</tiles>
+  </turn>
+  <turn no='23' player='3' rpc-delay='0.0381101s'>
+   <played>K3</played>
+  <table>R8.R9.R10-R5.R6.R7.R8-R10.R11.R12.R13-B3.B4.B5-B6.B7.B8-B6.B7.B8-R1.G1.K1-R3.G3.B3.K3-R4.G4.B4-R6.G6.K6-R9.G9.K9</table>
+   <tiles value='55'>G12.K5.K5.B12.K10.K11</tiles>
+  </turn>
+  <turn no='24' player='4' rpc-delay='0.110229s'>
+   <played>K4</played>
+  <table>R8.R9.R10-R5.R6.R7.R8-R10.R11.R12.R13-B3.B4.B5-B6.B7.B8-B6.B7.B8-R1.G1.K1-R3.G3.B3.K3-R4.G4.B4.K4-R6.G6.K6-R9.G9.K9</table>
+   <tiles value='54'>K13.K7.G6.K2.G11.K10.G5</tiles>
+  </turn>
+  <turn no='25' player='1' rpc-delay='0.0135304s'>
+   <played>B2</played>
+  <table>R8.R9.R10-R5.R6.R7.R8-R10.R11.R12.R13-B2.B3.B4.B5-B6.B7.B8-B6.B7.B8-R1.G1.K1-R3.G3.B3.K3-R4.G4.B4.K4-R6.G6.K6-R9.G9.K9</table>
+   <tiles value='46'>K8.G1.G9.R1.G5.K12.G10</tiles>
+  </turn>
+  <turn no='26' player='2' rpc-delay='4.92745s'>
+   <drawn>K1</drawn>
+   <pool size='41'/>
+   <tiles value='47'>B13.B10.B11.G12.K1</tiles>
+  </turn>
+  <turn no='27' player='3' rpc-delay='0.0482087s'>
+   <drawn>B9</drawn>
+   <pool size='40'/>
+   <tiles value='64'>G12.K5.K5.B12.K10.K11.B9</tiles>
+  </turn>
+  <turn no='28' player='4' rpc-delay='0.025319s'>
+   <drawn>B9</drawn>
+   <pool size='39'/>
+   <tiles value='63'>K13.K7.G6.K2.G11.K10.G5.B9</tiles>
+  </turn>
+  <turn no='29' player='1' rpc-delay='0.0140799s'>
+   <drawn>K7</drawn>
+   <pool size='38'/>
+   <tiles value='53'>K8.G1.G9.R1.G5.K12.G10.K7</tiles>
+  </turn>
+  <turn no='30' player='2' rpc-delay='4.68731s'>
+   <drawn>G8</drawn>
+   <pool size='37'/>
+   <tiles value='55'>B13.B10.B11.G12.K1.G8</tiles>
+  </turn>
+  <turn no='31' player='3' rpc-delay='0.0423673s'>
+   <played>B9</played>
+  <table>R8.R9.R10-R5.R6.R7.R8-R10.R11.R12.R13-B2.B3.B4.B5-B6.B7.B8.B9-B6.B7.B8-R1.G1.K1-R3.G3.B3.K3-R4.G4.B4.K4-R6.G6.K6-R9.G9.K9</table>
+   <tiles value='55'>G12.K5.K5.B12.K10.K11</tiles>
+  </turn>
+  <turn no='32' player='4' rpc-delay='0.0601483s'>
+   <played>B9</played>
+  <table>R8.R9.R10-R5.R6.R7.R8-R10.R11.R12.R13-B2.B3.B4.B5-B6.B7.B8.B9-B6.B7.B8.B9-R1.G1.K1-R3.G3.B3.K3-R4.G4.B4.K4-R6.G6.K6-R9.G9.K9</table>
+   <tiles value='54'>K13.K7.G6.K2.G11.K10.G5</tiles>
+  </turn>
+  <turn no='33' player='1' rpc-delay='0.013793s'>
+   <drawn>G7</drawn>
+   <pool size='36'/>
+   <tiles value='60'>K8.G1.G9.R1.G5.K12.G10.K7.G7</tiles>
+  </turn>
+  <turn no='34' player='2' rpc-delay='4.71803s'>
+   <played>G8.B10.B11</played>
+  <table>R3.R4.R5-R6.R7.R8.R9.R10-R9.R10.R11.R12.R13-B2.B3.B4-B5.B6.B7-B6.B7.B8-B9.B10.B11-R1.G1.K1-G3.B3.K3-G4.B4.K4-R6.G6.K6-R8.G8.B8-G9.B9.K9</table>
+   <tiles value='26'>B13.G12.K1</tiles>
+  </turn>
+  <turn no='35' player='3' rpc-delay='0.042817s'>
+   <played>B12</played>
+  <table>R3.R4.R5-R6.R7.R8.R9.R10-R9.R10.R11.R12.R13-B2.B3.B4-B5.B6.B7-B6.B7.B8-B9.B10.B11.B12-R1.G1.K1-G3.B3.K3-G4.B4.K4-R6.G6.K6-R8.G8.B8-G9.B9.K9</table>
+   <tiles value='43'>G12.K5.K5.K10.K11</tiles>
+  </turn>
+  <turn no='36' player='4' rpc-delay='0.0442483s'>
+   <drawn>K9</drawn>
+   <pool size='35'/>
+   <tiles value='63'>K13.K7.G6.K2.G11.K10.G5.K9</tiles>
+  </turn>
+  <turn no='37' player='1' rpc-delay='0.0148293s'>
+   <played>G9.K8</played>
+  <table>R3.R4.R5-R6.R7.R8.R9.R10-R10.R11.R12.R13-B2.B3.B4-B5.B6.B7-B6.B7.B8-B10.B11.B12-R1.G1.K1-G3.B3.K3-G4.B4.K4-R6.G6.K6-R8.G8.B8.K8-G9.B9.K9-R9.G9.B9</table>
+   <tiles value='43'>G1.R1.G5.K12.G10.K7.G7</tiles>
+  </turn>
+  <turn no='38' player='2' rpc-delay='4.5856s'>
+   <played>B13</played>
+  <table>R3.R4.R5-R6.R7.R8-R8.R9.R10-R10.R11.R12.R13-B2.B3.B4-B5.B6.B7-B6.B7.B8-B10.B11.B12.B13-R1.G1.K1-G3.B3.K3-G4.B4.K4-R6.G6.K6-G8.B8.K8-G9.B9.K9-R9.G9.B9</table>
+   <tiles value='13'>G12.K1</tiles>
+  </turn>
+  <turn no='39' player='3' rpc-delay='0.0429355s'>
+   <drawn>K12</drawn>
+   <pool size='34'/>
+   <tiles value='55'>G12.K5.K5.K10.K11.K12</tiles>
+  </turn>
+  <turn no='40' player='4' rpc-delay='0.024617s'>
+   <played>K9</played>
+  <table>R3.R4.R5-R6.R7.R8-R8.R9.R10-R10.R11.R12.R13-B2.B3.B4-B5.B6.B7-B6.B7.B8-B10.B11.B12.B13-R1.G1.K1-G3.B3.K3-G4.B4.K4-R6.G6.K6-G8.B8.K8-G9.B9.K9-R9.G9.B9.K9</table>
+   <tiles value='54'>K13.K7.G6.K2.G11.K10.G5</tiles>
+  </turn>
+  <turn no='41' player='1' rpc-delay='0.0133796s'>
+   <played>G10</played>
+  <table>R3.R4.R5-R6.R7.R8-R8.R9.R10-R11.R12.R13-B2.B3.B4-B5.B6.B7-B6.B7.B8-B11.B12.B13-R1.G1.K1-G3.B3.K3-G4.B4.K4-R6.G6.K6-G8.B8.K8-G9.B9.K9-R9.G9.B9.K9-R10.G10.B10</table>
+   <tiles value='33'>G1.R1.G5.K12.K7.G7</tiles>
+  </turn>
+  <turn no='42' player='2' rpc-delay='4.58888s'>
+   <drawn>G4</drawn>
+   <pool size='33'/>
+   <tiles value='17'>G12.K1.G4</tiles>
+  </turn>
+  <turn no='43' player='3' rpc-delay='0.053874s'>
+   <played>K10.K11.K12</played>
+  <table>K10.K11.K12-R3.R4.R5-R6.R7.R8-R8.R9.R10-R11.R12.R13-B2.B3.B4-B5.B6.B7-B6.B7.B8-B11.B12.B13-R1.G1.K1-G3.B3.K3-G4.B4.K4-R6.G6.K6-G8.B8.K8-G9.B9.K9-R9.G9.B9.K9-R10.G10.B10</table>
+   <tiles value='22'>G12.K5.K5</tiles>
+  </turn>
+  <turn no='44' player='4' rpc-delay='0.0236156s'>
+   <played>K10.K13</played>
+  <table>K10.K11.K12.K13-R3.R4.R5-R6.R7.R8-R8.R9.R10-R11.R12.R13-B2.B3.B4-B5.B6.B7-B6.B7.B8-B11.B12.B13-R1.G1.K1-G3.B3.K3-G4.B4.K4-R6.G6.K6-G8.B8.K8-G9.B9.K9-R9.G9.B9.K9-R10.G10.B10.K10</table>
+   <tiles value='31'>K7.G6.K2.G11.G5</tiles>
+  </turn>
+  <turn no='45' player='1' rpc-delay='0.0129564s'>
+   <drawn>R2</drawn>
+   <pool size='32'/>
+   <tiles value='35'>G1.R1.G5.K12.K7.G7.R2</tiles>
+  </turn>
+  <turn no='46' player='2' rpc-delay='4.85913s'>
+   <played>G12</played>
+  <table>R5.R6.R7-R8.R9.R10.R11-B2.B3.B4-B3.B4.B5.B6.B7-B7.B8.B9.B10.B11-K10.K11.K12-R1.G1.K1-R3.G3.K3-R4.G4.K4-R6.G6.B6.K6-R8.G8.B8.K8-G9.B9.K9-R9.G9.K9-R10.G10.K10-R12.G12.B12-R13.B13.K13</table>
+   <tiles value='5'>K1.G4</tiles>
+  </turn>
+  <turn no='47' player='3' rpc-delay='0.0489221s'>
+   <drawn>B11</drawn>
+   <pool size='31'/>
+   <tiles value='33'>G12.K5.K5.B11</tiles>
+  </turn>
+  <turn no='48' player='4' rpc-delay='0.0223536s'>
+   <drawn>B1</drawn>
+   <pool size='30'/>
+   <tiles value='32'>K7.G6.K2.G11.G5.B1</tiles>
+  </turn>
+  <turn no='49' player='1' rpc-delay='0.0145112s'>
+   <played>K12</played>
+  <table>R5.R6.R7-R8.R9.R10.R11-B2.B3.B4-B3.B4.B5.B6.B7-B7.B8.B9.B10.B11-K10.K11.K12-R1.G1.K1-R3.G3.K3-R4.G4.K4-R6.G6.B6.K6-R8.G8.B8.K8-G9.B9.K9-R9.G9.K9-R10.G10.K10-R12.G12.B12.K12-R13.B13.K13</table>
+   <tiles value='23'>G1.R1.G5.K7.G7.R2</tiles>
+  </turn>
+  <turn no='50' player='2' rpc-delay='4.62074s'>
+   <drawn>G2</drawn>
+   <pool size='29'/>
+   <tiles value='7'>K1.G4.G2</tiles>
+  </turn>
+  <turn no='51' player='3' rpc-delay='0.0400182s'>
+   <drawn>G8</drawn>
+   <pool size='28'/>
+   <tiles value='41'>G12.K5.K5.B11.G8</tiles>
+  </turn>
+  <turn no='52' player='4' rpc-delay='0.139041s'>
+   <played>B1</played>
+  <table>R5.R6.R7-R8.R9.R10.R11-B1.B2.B3.B4-B3.B4.B5.B6.B7-B7.B8.B9.B10.B11-K10.K11.K12-R1.G1.K1-R3.G3.K3-R4.G4.K4-R6.G6.B6.K6-R8.G8.B8.K8-G9.B9.K9-R9.G9.K9-R10.G10.K10-R12.G12.B12.K12-R13.B13.K13</table>
+   <tiles value='31'>K7.G6.K2.G11.G5</tiles>
+  </turn>
+  <turn no='53' player='1' rpc-delay='0.0128696s'>
+   <drawn>R11</drawn>
+   <pool size='27'/>
+   <tiles value='34'>G1.R1.G5.K7.G7.R2.R11</tiles>
+  </turn>
+  <turn no='54' player='2' rpc-delay='4.72986s'>
+   <played>G2.G4</played>
+  <table>R4.R5.R6-R6.R7.R8-R8.R9.R10-R10.R11.R12-G2.G3.G4-G8.G9.G10-B6.B7.B8-B7.B8.B9-B9.B10.B11-B1.B2.B3.B4.B5-K8.K9.K10-K10.K11.K12-R1.G1.K1-R3.B3.K3-G4.B4.K4-G6.B6.K6-R9.G9.K9-G12.B12.K12-R13.B13.K13</table>
+   <tiles value='1'>K1</tiles>
+  </turn>
+  <turn no='55' player='3' rpc-delay='0.0513385s'>
+   <drawn>G13</drawn>
+   <pool size='26'/>
+   <tiles value='54'>G12.K5.K5.B11.G8.G13</tiles>
+  </turn>
+  <turn no='56' player='4' rpc-delay='0.228923s'>
+   <played>G5.G6.G11.K7</played>
+  <table>R4.R5.R6-R6.R7.R8-R8.R9.R10-R10.R11.R12-G2.G3.G4.G5.G6-G8.G9.G10.G11-B6.B7.B8-B7.B8.B9-B9.B10.B11-B1.B2.B3.B4.B5-K7.K8.K9.K10-K10.K11.K12-R1.G1.K1-R3.B3.K3-G4.B4.K4-G6.B6.K6-R9.G9.K9-G12.B12.K12-R13.B13.K13</table>
+   <tiles value='2'>K2</tiles>
+  </turn>
+  <turn no='57' player='1' rpc-delay='0.0132698s'>
+   <played>R1.R11.G1.G5.G7</played>
+  <table>R4.R5.R6-R6.R7.R8-R8.R9.R10.R11-R10.R11.R12-G2.G3.G4.G5-G8.G9.G10.G11-B6.B7.B8-B7.B8.B9-B9.B10.B11-B2.B3.B4.B5-K7.K8.K9.K10-K10.K11.K12-R1.G1.K1-R3.B3.K3-G4.B4.K4-G6.B6.K6-R9.G9.K9-G12.B12.K12-R13.B13.K13-G5.G6.G7-R1.G1.B1</table>
+   <tiles value='9'>K7.R2</tiles>
+  </turn>
+  <turn no='58' player='2' rpc-delay='4.74255s'>
+   <played>K1</played>
+  <table>R7.R8.R9-R10.R11.R12-G1.G2.G3.G4.G5-B2.B3.B4-B6.B7.B8-K10.K11.K12-R1.B1.K1-R1.G1.K1-R3.B3.K3-R4.G4.B4.K4-R5.G5.B5-R6.G6.K6-R6.G6.B6-G7.B7.K7-R8.G8.B8.K8-R9.G9.B9.K9-G9.B9.K9-R10.G10.B10.K10-R11.G11.B11-G12.B12.K12-R13.B13.K13</table>
+   <tiles value='0'></tiles>
+  </turn>
+ </turns>
+
+ <scores>
+  <score player='1'>9</score>
+  <score player='2'>0</score>
+  <score player='3'>54</score>
+  <score player='4'>2</score>
+ </scores>
+</rummikub-transcript>
