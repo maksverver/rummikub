@@ -15,7 +15,7 @@
 #include <windows.h>
 #endif
 
-static const int rpc_timeout = 5 + 2;  // seconds
+static const int rpc_timeout = 5 + 3;  // seconds
 
 struct Player
 {
