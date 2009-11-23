@@ -58,19 +58,25 @@ def print_totaal_head():
     print('[br]')
     print('[table]')
     print('[tr]' + th('Plaats', rowspan=2)
-                 + th('Deelnemer', rowspan=2, width=150)
+                 + th('Deelnemer', rowspan=2, width=120)
                  + th('Totaalscore', rowspan=2)
+                 + th('Aantal gewonnen', rowspan=2)
+                 + th('Aantal fouten', rowspan=2)
                  + th('Tijd', colspan=3, width=300) + '[/tr]')
     print('[tr]' + th('Totaal') + th('Gemiddeld') + th('Maximaal') + '[/tr]')
 
-def print_totaal(i, name, points, delays):
-    print('[tr]' + td(i, align='center') + td(name)
+def print_totaal(i, name, points, delays, failures, won):
+    print('[tr]' + td(i, align='center')
+                 + td(name)
                  + td(sum(points), align='right')
+                 + td(won,      align='right')
+                 + td(failures, align='right')
                  + td('%0.3fs' % sum(delays), align='right')
                  + td('%0.3fs' % (sum(delays)/len(delays)), align='right')
                  + td('%0.3fs' % max(delays), align='right') + '[/]')
 
 def print_totaal_tail():
+    print('[tr]' + th(' ', colspan=8) + '[/tr]')
     print('[/table]')
 
 def get_scores(path):
@@ -95,8 +101,10 @@ def get_scores(path):
              for id in [1,2,3,4] ]
 
 def collect(dir):
-    total_points = {}
-    total_delays = {}
+    total_points   = {}
+    total_delays   = {}
+    total_failures = {}
+    total_won      = {}
 
     print_rondes_head()
     files = glob.glob(os.path.join(dir, '*.xml'))
@@ -113,16 +121,21 @@ def collect(dir):
         for score in scores:
             name = score.name
             if name not in total_points:
-                total_points[name] = []
-                total_delays[name] = []
+                total_points[name]   = []
+                total_delays[name]   = []
+                total_failures[name] = 0
+                total_won[name]      = 0
             total_points[name].append(score.points - min_points)
-            total_delays[name] += score.delays
+            total_delays[name]   += score.delays
+            total_failures[name] += score.failures
+            total_won[name]      += (score.points == 0)
     print_rondes_tail()
 
     print_totaal_head()
     scores = [ (sum(total_points[name]), name) for name in total_points ]
     for i, (points, name) in enumerate(sorted(scores)):
-        print_totaal(i + 1, name, total_points[name], total_delays[name])
+        print_totaal(i + 1, name, total_points[name], total_delays[name],
+                            total_failures[name], total_won[name])
     print_totaal_tail()
 
 
