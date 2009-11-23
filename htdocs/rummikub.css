@@ -1,0 +1,86 @@
+body {
+    color: black;
+    background-color: white;
+    font: 11pt sans-serif;
+}
+
+table, table tr, table th, table td {
+    margin:  0;
+    padding: 0;
+    border:  0;
+    border-spacing: 0;
+}
+
+div.set {
+    display: inline;
+    padding-left: 0.7em;
+    padding-right: 0.7em;
+    padding-top: 0.35em;
+    padding-bottom: 0.35em;
+    height: 3em;
+}
+
+div.tileR, div.TileG, div.tileB, div.tileK {
+    background-color: #f0f0a0;
+    display: inline-block;
+    margin: 0.2em;
+    width: 2em;
+    height: 2.5em;
+    text-align: center;
+    font-size: 10pt;
+    font-weight: bold;
+}
+
+div.tileR {
+    border: 2px solid red;
+    color: #800000;
+}
+div.tileG {
+    border: 2px solid green;
+    color: #008000;
+}
+div.tileB {
+    border: 2px solid blue;
+    color: #000080;
+}
+div.tileK {
+    border: 2px solid black;
+    color: black;
+}
+
+table.players td,
+table.players th {
+    background:    #e0e0e0;
+    border-top:    1px solid white;
+    border-bottom: 1px solid white;
+}
+
+table.players tr.currentPlayer td,
+table.players tr.currentPlayer th {
+    background: #f0f080;
+}
+
+table.players th {
+    font-size: 12pt;
+    line-height: 1.6em;
+    padding: 0.2em;
+}
+div.score {
+    font-size: 10pt;
+}
+
+div.table {
+    border: 1px solid black;
+    margin: 1em;
+    padding: 1em;
+}
+
+table.setup td, table.setup th {
+    padding: 0.1em;
+}
+
+div.rack {
+    white-space: pre;
+    margin-left: 0.5em;
+    margin-right: 0.5em;
+}

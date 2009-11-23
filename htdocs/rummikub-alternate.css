@@ -1,0 +1,14 @@
+div.tileR,
+div.TileG,
+div.tileB,
+div.tileK {
+    width: 2.4em;
+    height: 3.0em;
+}
+
+div.tileR span.color,
+div.TileG span.color,
+div.tileB span.color,
+div.tileK span.color {
+    font-weight: normal;
+}

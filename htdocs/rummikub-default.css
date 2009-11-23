@@ -1,0 +1,6 @@
+div.tileR span.color,
+div.TileG span.color,
+div.tileB span.color,
+div.tileK span.color {
+    display: none;
+}
