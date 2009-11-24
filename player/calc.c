@@ -34,41 +34,39 @@ static int get_min_extended_runs(const int lengths[K])
     return res;
 }
 
-/* Greedily extends `cnt' runs, first extending runs of length 1 or 2, then
-   runs of length 3, and finally of length 0. */
+/* Greedily extends the first `cnt' runs and terminates the remaining runs.
+   Assumes input lengths are normalized (so that shorter runs appear first, and
+   empty runs appear at the end) and produces normalized output as well. */
 static void extend_runs(int lengths[K], int cnt)
 {
     int i, j;
 
-    /* Bubble sort runs so lengths are ordered as (1,2,3,0) */
-    /* CHECKME: is this necessary? */
+    assert(cnt <= K);
+
+    REP(i, cnt) if (lengths[i] < 3) ++lengths[i];
+    FOR(i, cnt, K) {
+        assert(lengths[i] == 0 || lengths[i] == 3);
+        lengths[i] = 0;
+    }
+
+    /* Normalize the result by bubble sorting: */
     REP(i, K) FOR(j, i + 1, K) if ((lengths[i] + 3)%4 > (lengths[j] + 3)%4) {
         int tmp = lengths[i];
         lengths[i] = lengths[j];
         lengths[j] = tmp;
     }
-
-    assert(cnt <= K && (cnt == K || (lengths[cnt] == 0 || lengths[cnt] == 3)));
-
-    REP(i, cnt) lengths[i] += (lengths[i] < 3) ? 1 : 0;
-    FOR(i, cnt, K) lengths[i] = 0;
 }
 
+/* Determines if the given tiles (where tile[c] is the number of tiles of color
+   c) can be grouped in a valid way. By the pigeon hole principle, if we have
+   `x' tiles of one color, we must make at least `x' groups of 3 tiles.
+   (Interestingly, this property is sufficent as well as neccessary.) */
 static bool can_group(const int tiles[C])
 {
     int c, total = 0;
-
-    assert(C == 4);  /* this function doesn't generalize! */
-
-    /* Can't make groups with exactly 1, 2 or 5 tiles: */
     REP(c, C) total += tiles[c];
-    if (total == 1 || total == 2 || total == 5) return false;
-
-    /* By the pigeon hole principle, if we have `x' tiles of one color, we must
-       make at least `x' groups of 3 tiles: */
     REP(c, C) if (3*tiles[c] > total) return false;
-
-    return true;    /* CHECKME: is this always correct? */
+    return true;
 }
 
 static int calc( const GameState *gs, const CalcState *cs, short memo[],
@@ -117,7 +115,7 @@ static int calc( const GameState *gs, const CalcState *cs, short memo[],
                 new_cs.grps[cur_c] = use - in_run;
 
                 /* Recursively calculate value: */
-                val = (cur_v + 1)*use;
+                val = TILE_VALUE(cur_v)*use;
                 val += calc(gs, &new_cs, memo, cur_v, cur_c + 1);
                 if (val > res) res = val;
             }
@@ -160,7 +158,7 @@ static bool reconstruct_for_v( const GameState *gs, CalcState *cs,
         REP(k, K) old_lens[k] = cs->lens[cur_c][k];
 
         /* Determine how many tiles of the current value/color we will use */
-        *value -= (cur_v + 1)*min_use;
+        *value -= TILE_VALUE(cur_v)*min_use;
         for (use = min_use; use <= max_use; ++use)
         {
             /* Determine how many used tiles will be placed in runs */
@@ -177,9 +175,9 @@ static bool reconstruct_for_v( const GameState *gs, CalcState *cs,
                 REP(k, K) cs->lens[cur_c][k] = old_lens[k];
             }
 
-            *value -= cur_v + 1;
+            *value -= TILE_VALUE(cur_v);
         }
-        *value += (cur_v + 1)*use;
+        *value += TILE_VALUE(cur_v)*use;
         return false;
     }
 }

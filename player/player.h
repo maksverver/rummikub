@@ -19,6 +19,8 @@ char *strtok_r(char *s, const char *sep, char **save);
 #define C    4        /* number of tile colors */
 #define K    2        /* number of duplicates of each tile */
 
+#define TILE_VALUE(v)  ((1 + (v)) * (1 + (v)))
+
 typedef int TileCollection[V][C];
 
 typedef struct GameState

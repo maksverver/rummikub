@@ -33,25 +33,20 @@ void free_table(Set *set)
     }
 }
 
-static int bitcount(int i)
-{
-    int res = 0;
-    for ( ; i; i &= i - 1) ++res;
-    return res;
-}
-
 int table_value(Set *set)
 {
-    int res = 0;
+    int res = 0, i;
     for ( ; set != NULL; set = set->next)
     {
         switch (set->type)
         {
         case RUN:
-            res += set->run.length*(2*set->run.start + set->run.length + 1)/2;
+            for (i = 0; i < set->run.length; ++i)
+                res += TILE_VALUE(set->run.start + i);
             break;
         case GROUP:
-            res += bitcount(set->group.color_mask)*(set->group.value + 1);
+            for (i = set->group.color_mask; i; i &= i - 1)
+                res += TILE_VALUE(set->group.value);
             break;
         }
     }
@@ -63,6 +58,6 @@ int collection_value(const int set[V][C])
     int res = 0, v, c;
     for (v = 0; v < V; ++v)
         for (c = 0; c < C; ++c)
-            res += (v + 1)*set[v][c];
+            res += TILE_VALUE(v)*set[v][c];
     return res;
 }
