@@ -21,11 +21,11 @@ static std::string build_query_string(const GameState &gs)
 }
 
 bool rpc_move(const char *base_url, bool post, int timeout, const GameState &gs,
-              std::string &response)
+              std::string &query, std::string &response)
 {
     std::ostringstream oss;
     std::string url = base_url;
-    std::string query = build_query_string(gs);
+    query = build_query_string(gs);
     if (!post) url += '?' + query;
     CURL *ch = curl_easy_init();
     if (!ch) return false;

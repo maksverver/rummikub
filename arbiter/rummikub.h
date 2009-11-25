@@ -51,7 +51,7 @@ std::istream &operator>>(std::istream &is, TileList  &vt);
 std::istream &operator>>(std::istream &is, Table &vvt);
 
 // RPC operations defined in rummikub-rpc.cpp
-bool rpc_move(const char *url, bool post, int timeout,
-              const GameState &game_state, std::string &response);
+bool rpc_move(const char *url, bool post, int timeout, const GameState
+              &game_state, std::string &request, std::string &response);
 
 #endif /* ndef RUMMIKUB_H_INCLUDED */

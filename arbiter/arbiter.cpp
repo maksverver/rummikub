@@ -115,12 +115,13 @@ void run_game(std::ostream &xscr, const TileList &tiles, Player (&players)[4])
         const Player &pl = players[gs.next_player];
         FileLock fl(pl.fd);
 
-        std::string response, error;
+        std::string request, response, error;
         TileList played_tiles;
         Table new_table;
 
         double delay = now();
-        bool ok = rpc_move(pl.url.c_str(), pl.post, rpc_timeout, gs, response);
+        bool ok = rpc_move( pl.url.c_str(), pl.post, rpc_timeout,
+                            gs, request, response );
         delay = now() - delay;
 
         xscr << "  <turn no='" << turn_no << "' player='"
@@ -174,6 +175,7 @@ void run_game(std::ostream &xscr, const TileList &tiles, Player (&players)[4])
         if (!error.empty())
         {
             xscr << "   <error>" << error << "</error>\n";
+            xscr << "   <request><![CDATA[" << request << "]]></request>\n";
             xscr << "   <response><![CDATA[" << response << "]]></response>\n";
         }
 
