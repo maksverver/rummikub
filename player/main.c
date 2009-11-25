@@ -3,6 +3,7 @@
 
 static const char *colors = "RGBK";
 
+/* Parse tiles seperated by periods and/or hyphens into a TileCollection: */
 static void parse_tiles(char *str, TileCollection set)
 {
     char *tok, *ptr;
@@ -16,15 +17,21 @@ static void parse_tiles(char *str, TileCollection set)
     }
 }
 
+/* Parse a query string describing the game state into a GameState structure: */
 static void parse_query(char *query, GameState *gs)
 {
-    char *key, *val, *ptr;
+    char *key, *val, *ptr = query;
 
     memset(gs, 0, sizeof(GameState));
-    for (key = strtok_r(query, "=", &ptr); key; key = strtok_r(NULL, "=", &ptr))
+
+    while ((key = ptr) != NULL)
     {
-        if ((val = strtok_r(NULL, "&;", &ptr)) != NULL)
+        if ((ptr = strchr(ptr, '=')) != NULL) *ptr++ = '\0';
+
+        if ((val = ptr) != NULL)
         {
+            if ((ptr = strchr(ptr, '&')) != NULL) *ptr++ = '\0';
+
             if (strcmp(key, "yourTiles") == 0)
                 parse_tiles(val, gs->tiles);
             if (strcmp(key, "table") == 0)
@@ -38,6 +45,9 @@ static void parse_query(char *query, GameState *gs)
     }
 }
 
+/* Parses the CGI arguments passed in from the environment and/or stdin into a
+   GameState structure, or return false if this fails. `method' is the HTTP
+   request method being used. */
 static bool parse_cgi_args(const char *method, GameState *gs)
 {
     char buf[1024];
@@ -72,11 +82,13 @@ static bool parse_cgi_args(const char *method, GameState *gs)
     return true;
 }
 
+/* Print a single tile to `fp' in the standard format: */
 static void print_tile(int value, int color, FILE *fp)
 {
     fprintf(fp, "%c%d", colors[color], value + 1);
 }
 
+/* Print a set of tiles to `fp', separated by periods: */
 static void print_set(Set *set, FILE *fp)
 {
     switch (set->type)
@@ -110,6 +122,42 @@ static void print_set(Set *set, FILE *fp)
     }
 }
 
+/* Verifies that `gs' describes a valid gamestate.
+   Note: currently does NOT verify that the table configuration is valid. */
+static bool verify_gamestate(const GameState *gs)
+{
+    int v, c, n, total_tiles = 0;
+
+    /* Ensure that every tile occurs at most K times: */
+    for (v = 0; v < V; ++v)
+    {
+        for (c = 0; c < C; ++c)
+        {
+            int tiles = gs->tiles[v][c] + gs->table[v][c];
+            if (gs->tiles[v][c] < 0 || gs->tiles[v][c] > K) return false;
+            if (gs->table[v][c] < 0 || gs->tiles[v][c] > K) return false;
+            if (tiles > K) return false;
+            total_tiles += tiles;
+        }
+    }
+
+    /* Ensure that the pool contains between 0 and V*C*K tiles: */
+    if (gs->pool_size < 0 || gs->pool_size > V*C*K) return false;
+    total_tiles += gs->pool_size;
+
+    /* Ensure each opponent has between 1 and V*C*K tiles: */
+    for (n = 0; n < 3; ++n)
+    {
+        if (gs->opponents_tiles[n] < 1 || gs->opponents_tiles[n] > V*C*K)
+            return false;
+        total_tiles += gs->opponents_tiles[n];
+    }
+
+    /* Ensure that the total number of tiles in the game is correct: */
+    return total_tiles == V*C*K;
+}
+
+/* Print a list of sets of tiles to `fp', seperated by hyphens: */
 static void print_table(Set *set, FILE *fp)
 {
     for ( ; set != NULL; set = set->next)
@@ -120,6 +168,7 @@ static void print_table(Set *set, FILE *fp)
     fputc('\n', stdout);
 }
 
+/* The application entry point. */
 int main(int argc, char *argv[])
 {
     const char *method;
@@ -141,6 +190,13 @@ int main(int argc, char *argv[])
             return 1;
         }
         parse_query(argv[1], &gs);
+    }
+
+    /* Verify the gamestate is valid (important for security!) */
+    if (!verify_gamestate(&gs))
+    {
+        fprintf(stderr, "Invalid gamestate received!\n");
+        return 1;
     }
 
     /* Call play() to determine what to do: */

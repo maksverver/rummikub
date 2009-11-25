@@ -19,18 +19,22 @@ char *strtok_r(char *s, const char *sep, char **save);
 #define C    4        /* number of tile colors */
 #define K    2        /* number of duplicates of each tile */
 
+/* Determines the penalty score for a tile with face value v (0 <= v < V) */
 #define TILE_VALUE(v)  ((1 + (v)) * (1 + (v)))
 
+/* A TileColection is an array of counts for each type of tile. */
 typedef int TileCollection[V][C];
 
+/* The game state which is presented as input to the player: */
 typedef struct GameState
 {
-    TileCollection tiles;           /* tiles on my rack */
-    TileCollection table;           /* tiles on the table */
-    int     pool_size;              /* number of tiles left in the pool */
-    int     opponents_tiles[3];     /* number of tiles my opponents have left */
+    TileCollection tiles;       /* tiles on my rack */
+    TileCollection table;       /* tiles on the table */
+    int pool_size;              /* number of tiles left in the pool */
+    int opponents_tiles[3];     /* number of tiles my opponents have left */
 } GameState;
 
+/* A single valid set of tiles, which is either a run or a group: */
 typedef struct Set
 {
     struct Set *next;
