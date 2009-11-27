@@ -4,7 +4,7 @@ import elementtree.ElementTree as ET
 import sys, os.path, glob
 
 # some hard-coded constants: (ugly)
-url_prefix='http://hell.student.utwente.nl/rummikub/transcripts/comp2/'
+url_prefix='http://hell.student.utwente.nl/rummikub/transcripts/comp3/'
 
 class Score:
     def __init__(self, name, points, failures, delays):
@@ -50,10 +50,9 @@ def print_ronde(ronde, path, scores):
 
 def print_rondes_tail():
     print('[tr]' + th(' ', colspan=10) + '[/tr]')
-    print('[/table]')
+    print('[/table][br]')
 
 def print_totaal_head():
-    print('[br]')
     print('[h2]Eindklassement[/h2]')
     print('[br]')
     print('[table]')
