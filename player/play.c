@@ -41,6 +41,14 @@ static int reserve_set(TileCollection tiles)
 
     return 0;
 }
+
+static int min_tiles_left(const GameState *gs)
+{
+    int res = gs->opponents_tiles[0];
+    if (gs->opponents_tiles[1] < res) res = gs->opponents_tiles[1];
+    if (gs->opponents_tiles[2] < res) res = gs->opponents_tiles[2];
+    return res;
+}
 #endif /* def GREEDY */
 
 /* This function implements the high-level strategy of the player. It takes a
@@ -76,8 +84,9 @@ Set *play(const GameState *gs)
     }
 
 #ifndef GREEDY
-    /* Try to hold back valid sets only if we cannot empty the rack: */
-    if (best_value < total_value)
+    /* Try to hold back valid sets, unless I can win the game now, or I can't
+       draw anymore anyway, or one of my opponents is about to win: */
+    if (best_value < total_value && gs->pool_size > 0 && min_tiles_left(gs) > 2)
     {
         GameState new_gs = *gs;
         Set *new_result;
