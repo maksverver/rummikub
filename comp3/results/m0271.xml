@@ -1,0 +1,440 @@
+<?xml version='1.0' encoding='UTF-8' ?><rummikub-transcript>
+ <setup>
+  <players>
+   <player id='1'>
+    <name>joostvanpinxten</name>
+    <url>http://hurricane-disco.nl/rummikub/stable.php</url>
+    <method>POST</method>
+    <tiles>B3.K7.B1.B11.B4.R1.R11.B4.R8.K7.R3.K12.K4.R12</tiles>
+   </player>
+   <player id='2'>
+    <name>bat266</name>
+    <url>http://212.187.65.162:8080/Rummicub/doIt</url>
+    <method>GET</method>
+    <tiles>G9.K11.G4.K13.R1.R8.K9.B8.R12.K9.G5.R2.B7.K8</tiles>
+   </player>
+   <player id='3'>
+    <name>jfeitsma</name>
+    <url>http://stig.home.fmf.nl/rummy/player.cgi</url>
+    <method>GET</method>
+    <tiles>G7.R4.R5.G1.K2.B12.K1.G5.G11.B13.B5.B3.G7.G10</tiles>
+   </player>
+   <player id='4'>
+    <name>Memorice</name>
+    <url>http://128.2.208.139:8080/rummikub.php</url>
+    <method>GET</method>
+    <tiles>B2.K6.K6.R10.R9.R13.K1.K10.K5.K3.K3.B8.K8.G3</tiles>
+   </player>
+  </players>
+  <pool size='48'>B10.K11.G1.B5.R7.R10.R3.K10.R7.R11.G4.K13.R6.K5.B6.B10.G13.B11.B9.G9.R9.B7.R5.B13.B6.B12.G2.G3.G8.R13.R2.G6.K2.B9.G10.K12.R6.G2.B2.G6.G12.R4.B1.G11.G12.G8.G13.K4</pool>
+ </setup>
+
+ <turns>
+  <turn no='1' player='1' rpc-delay='0.2069s'>
+   <drawn>B10</drawn>
+   <pool size='47'/>
+   <tiles value='98'>B3.K7.B1.B11.B4.R1.R11.B4.R8.K7.R3.K12.K4.R12.B10</tiles>
+  </turn>
+  <turn no='2' player='2' rpc-delay='0.075749s'>
+   <played>R8.B8.K8</played>
+  <table>R8.B8.K8</table>
+   <tiles value='82'>G9.K11.G4.K13.R1.K9.R12.K9.G5.R2.B7</tiles>
+  </turn>
+  <turn no='3' player='3' rpc-delay='0.080685s'>
+   <played>R5.G5.B5</played>
+  <table>R5.G5.B5-R8.B8.K8</table>
+   <tiles value='71'>G7.R4.G1.K2.B12.K1.G11.B13.B3.G7.G10</tiles>
+  </turn>
+  <turn no='4' player='4' rpc-delay='0.510634s'>
+   <drawn>K11</drawn>
+   <pool size='46'/>
+   <tiles value='98'>B2.K6.K6.R10.R9.R13.K1.K10.K5.K3.K3.B8.K8.G3.K11</tiles>
+  </turn>
+  <turn no='5' player='1' rpc-delay='0.883287s'>
+   <drawn>G1</drawn>
+   <pool size='45'/>
+   <tiles value='99'>B3.K7.B1.B11.B4.R1.R11.B4.R8.K7.R3.K12.K4.R12.B10.G1</tiles>
+  </turn>
+  <turn no='6' player='2' rpc-delay='0.067161s'>
+   <drawn>B5</drawn>
+   <pool size='44'/>
+   <tiles value='87'>G9.K11.G4.K13.R1.K9.R12.K9.G5.R2.B7.B5</tiles>
+  </turn>
+  <turn no='7' player='3' rpc-delay='0.103839s'>
+   <drawn>R7</drawn>
+   <pool size='43'/>
+   <tiles value='78'>G7.R4.G1.K2.B12.K1.G11.B13.B3.G7.G10.R7</tiles>
+  </turn>
+  <turn no='8' player='4' rpc-delay='0.517647s'>
+   <drawn>R10</drawn>
+   <pool size='42'/>
+   <tiles value='108'>B2.K6.K6.R10.R9.R13.K1.K10.K5.K3.K3.B8.K8.G3.K11.R10</tiles>
+  </turn>
+  <turn no='9' player='1' rpc-delay='0.936893s'>
+   <played>R1.G1.B1</played>
+  <table>R1.G1.B1-R5.G5.B5-R8.B8.K8</table>
+   <tiles value='96'>B3.K7.B11.B4.R11.B4.R8.K7.R3.K12.K4.R12.B10</tiles>
+  </turn>
+  <turn no='10' player='2' rpc-delay='0.074114s'>
+   <drawn>R3</drawn>
+   <pool size='41'/>
+   <tiles value='90'>G9.K11.G4.K13.R1.K9.R12.K9.G5.R2.B7.B5.R3</tiles>
+  </turn>
+  <turn no='11' player='3' rpc-delay='0.086907s'>
+   <played>K1</played>
+  <table>R1.G1.B1.K1-R5.G5.B5-R8.B8.K8</table>
+   <tiles value='77'>G7.R4.G1.K2.B12.G11.B13.B3.G7.G10.R7</tiles>
+  </turn>
+  <turn no='12' player='4' rpc-delay='0.572013s'>
+   <drawn>K10</drawn>
+   <pool size='40'/>
+   <tiles value='118'>B2.K6.K6.R10.R9.R13.K1.K10.K5.K3.K3.B8.K8.G3.K11.R10.K10</tiles>
+  </turn>
+  <turn no='13' player='1' rpc-delay='1.61998s'>
+   <drawn>R7</drawn>
+   <pool size='39'/>
+   <tiles value='103'>B3.K7.B11.B4.R11.B4.R8.K7.R3.K12.K4.R12.B10.R7</tiles>
+  </turn>
+  <turn no='14' player='2' rpc-delay='0.079172s'>
+   <played>R1.R2.R3</played>
+  <table>R1.R2.R3-R1.G1.B1.K1-R5.G5.B5-R8.B8.K8</table>
+   <tiles value='84'>G9.K11.G4.K13.K9.R12.K9.G5.B7.B5</tiles>
+  </turn>
+  <turn no='15' player='3' rpc-delay='0.08087s'>
+   <played>R4.G1</played>
+  <table>R2.R3.R4-R1.G1.K1-R1.G1.B1-R5.G5.B5-R8.B8.K8</table>
+   <tiles value='72'>G7.K2.B12.G11.B13.B3.G7.G10.R7</tiles>
+  </turn>
+  <turn no='16' player='4' rpc-delay='2.36984s'>
+   <drawn>R11</drawn>
+   <pool size='38'/>
+   <tiles value='129'>B2.K6.K6.R10.R9.R13.K1.K10.K5.K3.K3.B8.K8.G3.K11.R10.K10.R11</tiles>
+  </turn>
+  <turn no='17' player='1' rpc-delay='6.74805s'>
+   <drawn>G4</drawn>
+   <pool size='37'/>
+   <tiles value='107'>B3.K7.B11.B4.R11.B4.R8.K7.R3.K12.K4.R12.B10.R7.G4</tiles>
+   <error>syntax error in request response</error>
+   <request><![CDATA[yourTiles=B3.K7.B11.B4.R11.B4.R8.K7.R3.K12.K4.R12.B10.R7&table=R2.R3.R4-R1.G1.K1-R1.G1.B1-R5.G5.B5-R8.B8.K8&poolTiles=38&opponentsTiles=10.9.18]]></request>
+   <response><![CDATA[<br />
+<b>Fatal error</b>:  Maximum execution time of 6 seconds exceeded in <b>/home/vhosts/hurricane-disco.nl/httpdocs/rummikub/stable.php</b> on line <b>140</b><br />
+]]></response>
+  </turn>
+  <turn no='18' player='2' rpc-delay='0.06441s'>
+   <drawn>K13</drawn>
+   <pool size='36'/>
+   <tiles value='97'>G9.K11.G4.K13.K9.R12.K9.G5.B7.B5.K13</tiles>
+  </turn>
+  <turn no='19' player='3' rpc-delay='0.076869s'>
+   <drawn>R6</drawn>
+   <pool size='35'/>
+   <tiles value='78'>G7.K2.B12.G11.B13.B3.G7.G10.R7.R6</tiles>
+  </turn>
+  <turn no='20' player='4' rpc-delay='3.97127s'>
+   <drawn>K5</drawn>
+   <pool size='34'/>
+   <tiles value='134'>B2.K6.K6.R10.R9.R13.K1.K10.K5.K3.K3.B8.K8.G3.K11.R10.K10.R11.K5</tiles>
+  </turn>
+  <turn no='21' player='1' rpc-delay='7.21211s'>
+   <drawn>B6</drawn>
+   <pool size='33'/>
+   <tiles value='113'>B3.K7.B11.B4.R11.B4.R8.K7.R3.K12.K4.R12.B10.R7.G4.B6</tiles>
+   <error>syntax error in request response</error>
+   <request><![CDATA[yourTiles=B3.K7.B11.B4.R11.B4.R8.K7.R3.K12.K4.R12.B10.R7.G4&table=R2.R3.R4-R1.G1.K1-R1.G1.B1-R5.G5.B5-R8.B8.K8&poolTiles=34&opponentsTiles=11.10.19]]></request>
+   <response><![CDATA[<br />
+<b>Fatal error</b>:  Maximum execution time of 6 seconds exceeded in <b>/home/vhosts/hurricane-disco.nl/httpdocs/rummikub/stable.php</b> on line <b>402</b><br />
+]]></response>
+  </turn>
+  <turn no='22' player='2' rpc-delay='0.09132s'>
+   <drawn>B10</drawn>
+   <pool size='32'/>
+   <tiles value='107'>G9.K11.G4.K13.K9.R12.K9.G5.B7.B5.K13.B10</tiles>
+  </turn>
+  <turn no='23' player='3' rpc-delay='0.090995s'>
+   <drawn>G13</drawn>
+   <pool size='31'/>
+   <tiles value='91'>G7.K2.B12.G11.B13.B3.G7.G10.R7.R6.G13</tiles>
+  </turn>
+  <turn no='24' player='4' rpc-delay='6.92483s'>
+   <drawn>B11</drawn>
+   <pool size='30'/>
+   <tiles value='145'>B2.K6.K6.R10.R9.R13.K1.K10.K5.K3.K3.B8.K8.G3.K11.R10.K10.R11.K5.B11</tiles>
+  </turn>
+  <turn no='25' player='1' rpc-delay='8.21585s'>
+   <drawn>B9</drawn>
+   <pool size='29'/>
+   <tiles value='122'>B3.K7.B11.B4.R11.B4.R8.K7.R3.K12.K4.R12.B10.R7.G4.B6.B9</tiles>
+   <error>RPC failed</error>
+   <request><![CDATA[yourTiles=B3.K7.B11.B4.R11.B4.R8.K7.R3.K12.K4.R12.B10.R7.G4.B6&table=R2.R3.R4-R1.G1.K1-R1.G1.B1-R5.G5.B5-R8.B8.K8&poolTiles=30&opponentsTiles=12.11.20]]></request>
+   <response><![CDATA[]]></response>
+  </turn>
+  <turn no='26' player='2' rpc-delay='0.076147s'>
+   <drawn>G9</drawn>
+   <pool size='28'/>
+   <tiles value='116'>G9.K11.G4.K13.K9.R12.K9.G5.B7.B5.K13.B10.G9</tiles>
+  </turn>
+  <turn no='27' player='3' rpc-delay='0.097236s'>
+   <drawn>R9</drawn>
+   <pool size='27'/>
+   <tiles value='100'>G7.K2.B12.G11.B13.B3.G7.G10.R7.R6.G13.R9</tiles>
+  </turn>
+  <turn no='28' player='4' rpc-delay='3.10413s'>
+   <drawn>B7</drawn>
+   <pool size='26'/>
+   <tiles value='152'>B2.K6.K6.R10.R9.R13.K1.K10.K5.K3.K3.B8.K8.G3.K11.R10.K10.R11.K5.B11.B7</tiles>
+  </turn>
+  <turn no='29' player='1' rpc-delay='6.48268s'>
+   <drawn>R5</drawn>
+   <pool size='25'/>
+   <tiles value='127'>B3.K7.B11.B4.R11.B4.R8.K7.R3.K12.K4.R12.B10.R7.G4.B6.B9.R5</tiles>
+   <error>syntax error in request response</error>
+   <request><![CDATA[yourTiles=B3.K7.B11.B4.R11.B4.R8.K7.R3.K12.K4.R12.B10.R7.G4.B6.B9&table=R2.R3.R4-R1.G1.K1-R1.G1.B1-R5.G5.B5-R8.B8.K8&poolTiles=26&opponentsTiles=13.12.21]]></request>
+   <response><![CDATA[<br />
+<b>Fatal error</b>:  Maximum execution time of 6 seconds exceeded in <b>/home/vhosts/hurricane-disco.nl/httpdocs/rummikub/stable.php</b> on line <b>197</b><br />
+]]></response>
+  </turn>
+  <turn no='30' player='2' rpc-delay='0.075977s'>
+   <drawn>B13</drawn>
+   <pool size='24'/>
+   <tiles value='129'>G9.K11.G4.K13.K9.R12.K9.G5.B7.B5.K13.B10.G9.B13</tiles>
+  </turn>
+  <turn no='31' player='3' rpc-delay='0.122275s'>
+   <drawn>B6</drawn>
+   <pool size='23'/>
+   <tiles value='106'>G7.K2.B12.G11.B13.B3.G7.G10.R7.R6.G13.R9.B6</tiles>
+  </turn>
+  <turn no='32' player='4' rpc-delay='8.21117s'>
+   <drawn>B12</drawn>
+   <pool size='22'/>
+   <tiles value='164'>B2.K6.K6.R10.R9.R13.K1.K10.K5.K3.K3.B8.K8.G3.K11.R10.K10.R11.K5.B11.B7.B12</tiles>
+   <error>RPC failed</error>
+   <request><![CDATA[yourTiles=B2.K6.K6.R10.R9.R13.K1.K10.K5.K3.K3.B8.K8.G3.K11.R10.K10.R11.K5.B11.B7&table=R2.R3.R4-R1.G1.K1-R1.G1.B1-R5.G5.B5-R8.B8.K8&poolTiles=23&opponentsTiles=18.14.13]]></request>
+   <response><![CDATA[]]></response>
+  </turn>
+  <turn no='33' player='1' rpc-delay='6.82903s'>
+   <drawn>G2</drawn>
+   <pool size='21'/>
+   <tiles value='129'>B3.K7.B11.B4.R11.B4.R8.K7.R3.K12.K4.R12.B10.R7.G4.B6.B9.R5.G2</tiles>
+   <error>syntax error in request response</error>
+   <request><![CDATA[yourTiles=B3.K7.B11.B4.R11.B4.R8.K7.R3.K12.K4.R12.B10.R7.G4.B6.B9.R5&table=R2.R3.R4-R1.G1.K1-R1.G1.B1-R5.G5.B5-R8.B8.K8&poolTiles=22&opponentsTiles=14.13.22]]></request>
+   <response><![CDATA[<br />
+<b>Fatal error</b>:  Maximum execution time of 6 seconds exceeded in <b>/home/vhosts/hurricane-disco.nl/httpdocs/rummikub/stable.php</b> on line <b>333</b><br />
+]]></response>
+  </turn>
+  <turn no='34' player='2' rpc-delay='0.061427s'>
+   <drawn>G3</drawn>
+   <pool size='20'/>
+   <tiles value='132'>G9.K11.G4.K13.K9.R12.K9.G5.B7.B5.K13.B10.G9.B13.G3</tiles>
+  </turn>
+  <turn no='35' player='3' rpc-delay='0.081018s'>
+   <drawn>G8</drawn>
+   <pool size='19'/>
+   <tiles value='114'>G7.K2.B12.G11.B13.B3.G7.G10.R7.R6.G13.R9.B6.G8</tiles>
+  </turn>
+  <turn no='36' player='4' rpc-delay='5.08443s'>
+   <drawn>R13</drawn>
+   <pool size='18'/>
+   <tiles value='177'>B2.K6.K6.R10.R9.R13.K1.K10.K5.K3.K3.B8.K8.G3.K11.R10.K10.R11.K5.B11.B7.B12.R13</tiles>
+  </turn>
+  <turn no='37' player='1' rpc-delay='6.48661s'>
+   <drawn>R2</drawn>
+   <pool size='17'/>
+   <tiles value='131'>B3.K7.B11.B4.R11.B4.R8.K7.R3.K12.K4.R12.B10.R7.G4.B6.B9.R5.G2.R2</tiles>
+   <error>syntax error in request response</error>
+   <request><![CDATA[yourTiles=B3.K7.B11.B4.R11.B4.R8.K7.R3.K12.K4.R12.B10.R7.G4.B6.B9.R5.G2&table=R2.R3.R4-R1.G1.K1-R1.G1.B1-R5.G5.B5-R8.B8.K8&poolTiles=18&opponentsTiles=15.14.23]]></request>
+   <response><![CDATA[<br />
+<b>Fatal error</b>:  Maximum execution time of 6 seconds exceeded in <b>/home/vhosts/hurricane-disco.nl/httpdocs/rummikub/stable.php</b> on line <b>329</b><br />
+]]></response>
+  </turn>
+  <turn no='38' player='2' rpc-delay='0.072992s'>
+   <played>G3.G4.G5</played>
+  <table>G3.G4.G5-R2.R3.R4-R1.G1.K1-R1.G1.B1-R5.G5.B5-R8.B8.K8</table>
+   <tiles value='120'>G9.K11.K13.K9.R12.K9.B7.B5.K13.B10.G9.B13</tiles>
+  </turn>
+  <turn no='39' player='3' rpc-delay='0.076649s'>
+   <played>R6.R7.R9.G8</played>
+  <table>R2.R3.R4-R6.R7.R8.R9-G3.G4.G5-R1.G1.K1-R1.G1.B1-R5.G5.B5-G8.B8.K8</table>
+   <tiles value='84'>G7.K2.B12.G11.B13.B3.G7.G10.G13.B6</tiles>
+  </turn>
+  <turn no='40' player='4' rpc-delay='5.86448s'>
+   <drawn>G6</drawn>
+   <pool size='16'/>
+   <tiles value='183'>B2.K6.K6.R10.R9.R13.K1.K10.K5.K3.K3.B8.K8.G3.K11.R10.K10.R11.K5.B11.B7.B12.R13.G6</tiles>
+  </turn>
+  <turn no='41' player='1' rpc-delay='6.63475s'>
+   <drawn>K2</drawn>
+   <pool size='15'/>
+   <tiles value='133'>B3.K7.B11.B4.R11.B4.R8.K7.R3.K12.K4.R12.B10.R7.G4.B6.B9.R5.G2.R2.K2</tiles>
+   <error>syntax error in request response</error>
+   <request><![CDATA[yourTiles=B3.K7.B11.B4.R11.B4.R8.K7.R3.K12.K4.R12.B10.R7.G4.B6.B9.R5.G2.R2&table=R2.R3.R4-R6.R7.R8.R9-G3.G4.G5-R1.G1.K1-R1.G1.B1-R5.G5.B5-G8.B8.K8&poolTiles=16&opponentsTiles=12.10.24]]></request>
+   <response><![CDATA[<br />
+<b>Fatal error</b>:  Maximum execution time of 6 seconds exceeded in <b>/home/vhosts/hurricane-disco.nl/httpdocs/rummikub/stable.php</b> on line <b>140</b><br />
+]]></response>
+  </turn>
+  <turn no='42' player='2' rpc-delay='0.11523s'>
+   <drawn>B9</drawn>
+   <pool size='14'/>
+   <tiles value='129'>G9.K11.K13.K9.R12.K9.B7.B5.K13.B10.G9.B13.B9</tiles>
+  </turn>
+  <turn no='43' player='3' rpc-delay='0.096857s'>
+   <drawn>G10</drawn>
+   <pool size='13'/>
+   <tiles value='94'>G7.K2.B12.G11.B13.B3.G7.G10.G13.B6.G10</tiles>
+  </turn>
+  <turn no='44' player='4' rpc-delay='8.49492s'>
+   <drawn>K12</drawn>
+   <pool size='12'/>
+   <tiles value='195'>B2.K6.K6.R10.R9.R13.K1.K10.K5.K3.K3.B8.K8.G3.K11.R10.K10.R11.K5.B11.B7.B12.R13.G6.K12</tiles>
+   <error>RPC failed</error>
+   <request><![CDATA[yourTiles=B2.K6.K6.R10.R9.R13.K1.K10.K5.K3.K3.B8.K8.G3.K11.R10.K10.R11.K5.B11.B7.B12.R13.G6&table=R2.R3.R4-R6.R7.R8.R9-G3.G4.G5-R1.G1.K1-R1.G1.B1-R5.G5.B5-G8.B8.K8&poolTiles=13&opponentsTiles=21.13.11]]></request>
+   <response><![CDATA[]]></response>
+  </turn>
+  <turn no='45' player='1' rpc-delay='7.15048s'>
+   <drawn>R6</drawn>
+   <pool size='11'/>
+   <tiles value='139'>B3.K7.B11.B4.R11.B4.R8.K7.R3.K12.K4.R12.B10.R7.G4.B6.B9.R5.G2.R2.K2.R6</tiles>
+   <error>syntax error in request response</error>
+   <request><![CDATA[yourTiles=B3.K7.B11.B4.R11.B4.R8.K7.R3.K12.K4.R12.B10.R7.G4.B6.B9.R5.G2.R2.K2&table=R2.R3.R4-R6.R7.R8.R9-G3.G4.G5-R1.G1.K1-R1.G1.B1-R5.G5.B5-G8.B8.K8&poolTiles=12&opponentsTiles=13.11.25]]></request>
+   <response><![CDATA[<br />
+<b>Fatal error</b>:  Maximum execution time of 6 seconds exceeded in <b>/home/vhosts/hurricane-disco.nl/httpdocs/rummikub/stable.php</b> on line <b>404</b><br />
+]]></response>
+  </turn>
+  <turn no='46' player='2' rpc-delay='0.06564s'>
+   <played>G9.B9.K9</played>
+  <table>G9.B9.K9-R2.R3.R4-R6.R7.R8.R9-G3.G4.G5-R1.G1.K1-R1.G1.B1-R5.G5.B5-G8.B8.K8</table>
+   <tiles value='102'>K11.K13.R12.K9.B7.B5.K13.B10.G9.B13</tiles>
+  </turn>
+  <turn no='47' player='3' rpc-delay='0.128806s'>
+   <played>G10.G11</played>
+  <table>R2.R3.R4-R6.R7.R8-G3.G4.G5-G9.G10.G11-R1.G1.K1-R1.G1.B1-R5.G5.B5-G8.B8.K8-R9.B9.K9</table>
+   <tiles value='73'>G7.K2.B12.B13.B3.G7.G13.B6.G10</tiles>
+  </turn>
+  <turn no='48' player='4' rpc-delay='5.82707s'>
+   <drawn>G2</drawn>
+   <pool size='10'/>
+   <tiles value='197'>B2.K6.K6.R10.R9.R13.K1.K10.K5.K3.K3.B8.K8.G3.K11.R10.K10.R11.K5.B11.B7.B12.R13.G6.K12.G2</tiles>
+  </turn>
+  <turn no='49' player='1' rpc-delay='7.30405s'>
+   <drawn>B2</drawn>
+   <pool size='9'/>
+   <tiles value='141'>B3.K7.B11.B4.R11.B4.R8.K7.R3.K12.K4.R12.B10.R7.G4.B6.B9.R5.G2.R2.K2.R6.B2</tiles>
+   <error>syntax error in request response</error>
+   <request><![CDATA[yourTiles=B3.K7.B11.B4.R11.B4.R8.K7.R3.K12.K4.R12.B10.R7.G4.B6.B9.R5.G2.R2.K2.R6&table=R2.R3.R4-R6.R7.R8-G3.G4.G5-G9.G10.G11-R1.G1.K1-R1.G1.B1-R5.G5.B5-G8.B8.K8-R9.B9.K9&poolTiles=10&opponentsTiles=10.9.26]]></request>
+   <response><![CDATA[<br />
+<b>Fatal error</b>:  Maximum execution time of 6 seconds exceeded in <b>/home/vhosts/hurricane-disco.nl/httpdocs/rummikub/stable.php</b> on line <b>324</b><br />
+]]></response>
+  </turn>
+  <turn no='50' player='2' rpc-delay='0.117904s'>
+   <played>G9</played>
+  <table>R2.R3.R4-R6.R7.R8-G3.G4.G5-G9.G10.G11-R1.G1.K1-R1.G1.B1-R5.G5.B5-G8.B8.K8-R9.G9.B9.K9</table>
+   <tiles value='93'>K11.K13.R12.K9.B7.B5.K13.B10.B13</tiles>
+  </turn>
+  <turn no='51' player='3' rpc-delay='0.099121s'>
+   <drawn>G6</drawn>
+   <pool size='8'/>
+   <tiles value='79'>G7.K2.B12.B13.B3.G7.G13.B6.G10.G6</tiles>
+  </turn>
+  <turn no='52' player='4' rpc-delay='4.2409s'>
+   <drawn>G12</drawn>
+   <pool size='7'/>
+   <tiles value='209'>B2.K6.K6.R10.R9.R13.K1.K10.K5.K3.K3.B8.K8.G3.K11.R10.K10.R11.K5.B11.B7.B12.R13.G6.K12.G2.G12</tiles>
+  </turn>
+  <turn no='53' player='1' rpc-delay='6.60996s'>
+   <drawn>R4</drawn>
+   <pool size='6'/>
+   <tiles value='145'>B3.K7.B11.B4.R11.B4.R8.K7.R3.K12.K4.R12.B10.R7.G4.B6.B9.R5.G2.R2.K2.R6.B2.R4</tiles>
+   <error>syntax error in request response</error>
+   <request><![CDATA[yourTiles=B3.K7.B11.B4.R11.B4.R8.K7.R3.K12.K4.R12.B10.R7.G4.B6.B9.R5.G2.R2.K2.R6.B2&table=R2.R3.R4-R6.R7.R8-G3.G4.G5-G9.G10.G11-R1.G1.K1-R1.G1.B1-R5.G5.B5-G8.B8.K8-R9.G9.B9.K9&poolTiles=7&opponentsTiles=9.10.27]]></request>
+   <response><![CDATA[<br />
+<b>Fatal error</b>:  Maximum execution time of 6 seconds exceeded in <b>/home/vhosts/hurricane-disco.nl/httpdocs/rummikub/stable.php</b> on line <b>140</b><br />
+]]></response>
+  </turn>
+  <turn no='54' player='2' rpc-delay='0.05804s'>
+   <drawn>B1</drawn>
+   <pool size='5'/>
+   <tiles value='94'>K11.K13.R12.K9.B7.B5.K13.B10.B13.B1</tiles>
+  </turn>
+  <turn no='55' player='3' rpc-delay='0.081316s'>
+   <played>G6.G7</played>
+  <table>R2.R3.R4-R6.R7.R8.R9-G9.G10.G11-G3.G4.G5.G6.G7-R1.G1.K1-R1.G1.B1-R5.G5.B5-G8.B8.K8-G9.B9.K9</table>
+   <tiles value='66'>K2.B12.B13.B3.G7.G13.B6.G10</tiles>
+  </turn>
+  <turn no='56' player='4' rpc-delay='3.46503s'>
+   <drawn>G11</drawn>
+   <pool size='4'/>
+   <tiles value='220'>B2.K6.K6.R10.R9.R13.K1.K10.K5.K3.K3.B8.K8.G3.K11.R10.K10.R11.K5.B11.B7.B12.R13.G6.K12.G2.G12.G11</tiles>
+  </turn>
+  <turn no='57' player='1' rpc-delay='6.43849s'>
+   <drawn>G12</drawn>
+   <pool size='3'/>
+   <tiles value='157'>B3.K7.B11.B4.R11.B4.R8.K7.R3.K12.K4.R12.B10.R7.G4.B6.B9.R5.G2.R2.K2.R6.B2.R4.G12</tiles>
+   <error>syntax error in request response</error>
+   <request><![CDATA[yourTiles=B3.K7.B11.B4.R11.B4.R8.K7.R3.K12.K4.R12.B10.R7.G4.B6.B9.R5.G2.R2.K2.R6.B2.R4&table=R2.R3.R4-R6.R7.R8.R9-G9.G10.G11-G3.G4.G5.G6.G7-R1.G1.K1-R1.G1.B1-R5.G5.B5-G8.B8.K8-G9.B9.K9&poolTiles=4&opponentsTiles=10.8.28]]></request>
+   <response><![CDATA[<br />
+<b>Fatal error</b>:  Maximum execution time of 6 seconds exceeded in <b>/home/vhosts/hurricane-disco.nl/httpdocs/rummikub/stable.php</b> on line <b>140</b><br />
+]]></response>
+  </turn>
+  <turn no='58' player='2' rpc-delay='0.055711s'>
+   <played>B1</played>
+  <table>R2.R3.R4-R6.R7.R8.R9-G9.G10.G11-G3.G4.G5.G6.G7-R1.G1.B1.K1-R1.G1.B1-R5.G5.B5-G8.B8.K8-G9.B9.K9</table>
+   <tiles value='93'>K11.K13.R12.K9.B7.B5.K13.B10.B13</tiles>
+  </turn>
+  <turn no='59' player='3' rpc-delay='0.116421s'>
+   <drawn>G8</drawn>
+   <pool size='2'/>
+   <tiles value='74'>K2.B12.B13.B3.G7.G13.B6.G10.G8</tiles>
+  </turn>
+  <turn no='60' player='4' rpc-delay='3.36443s'>
+   <drawn>G13</drawn>
+   <pool size='1'/>
+   <tiles value='233'>B2.K6.K6.R10.R9.R13.K1.K10.K5.K3.K3.B8.K8.G3.K11.R10.K10.R11.K5.B11.B7.B12.R13.G6.K12.G2.G12.G11.G13</tiles>
+  </turn>
+  <turn no='61' player='1' rpc-delay='6.35431s'>
+   <drawn>K4</drawn>
+   <pool size='0'/>
+   <tiles value='161'>B3.K7.B11.B4.R11.B4.R8.K7.R3.K12.K4.R12.B10.R7.G4.B6.B9.R5.G2.R2.K2.R6.B2.R4.G12.K4</tiles>
+   <error>syntax error in request response</error>
+   <request><![CDATA[yourTiles=B3.K7.B11.B4.R11.B4.R8.K7.R3.K12.K4.R12.B10.R7.G4.B6.B9.R5.G2.R2.K2.R6.B2.R4.G12&table=R2.R3.R4-R6.R7.R8.R9-G9.G10.G11-G3.G4.G5.G6.G7-R1.G1.B1.K1-R1.G1.B1-R5.G5.B5-G8.B8.K8-G9.B9.K9&poolTiles=1&opponentsTiles=9.9.29]]></request>
+   <response><![CDATA[<br />
+<b>Fatal error</b>:  Maximum execution time of 6 seconds exceeded in <b>/home/vhosts/hurricane-disco.nl/httpdocs/rummikub/stable.php</b> on line <b>406</b><br />
+]]></response>
+  </turn>
+  <turn no='62' player='2' rpc-delay='0.057971s'>
+   <pass count='1'/>
+   <tiles value='93'>K11.K13.R12.K9.B7.B5.K13.B10.B13</tiles>
+  </turn>
+  <turn no='63' player='3' rpc-delay='0.088846s'>
+   <played>G7.G8.G10</played>
+  <table>R6.R7.R8-R1.R2.R3.R4-G9.G10.G11-G7.G8.G9.G10-G3.G4.G5.G6.G7-G1.B1.K1-R1.G1.B1-R5.G5.B5-G8.B8.K8-R9.B9.K9</table>
+   <tiles value='49'>K2.B12.B13.B3.G13.B6</tiles>
+  </turn>
+  <turn no='64' player='4' rpc-delay='3.39622s'>
+   <pass count='1'/>
+   <tiles value='233'>B2.K6.K6.R10.R9.R13.K1.K10.K5.K3.K3.B8.K8.G3.K11.R10.K10.R11.K5.B11.B7.B12.R13.G6.K12.G2.G12.G11.G13</tiles>
+  </turn>
+  <turn no='65' player='1' rpc-delay='7.24249s'>
+   <pass count='2'/>
+   <tiles value='161'>B3.K7.B11.B4.R11.B4.R8.K7.R3.K12.K4.R12.B10.R7.G4.B6.B9.R5.G2.R2.K2.R6.B2.R4.G12.K4</tiles>
+   <error>syntax error in request response</error>
+   <request><![CDATA[yourTiles=B3.K7.B11.B4.R11.B4.R8.K7.R3.K12.K4.R12.B10.R7.G4.B6.B9.R5.G2.R2.K2.R6.B2.R4.G12.K4&table=R6.R7.R8-R1.R2.R3.R4-G9.G10.G11-G7.G8.G9.G10-G3.G4.G5.G6.G7-G1.B1.K1-R1.G1.B1-R5.G5.B5-G8.B8.K8-R9.B9.K9&poolTiles=0&opponentsTiles=9.6.29]]></request>
+   <response><![CDATA[<br />
+<b>Fatal error</b>:  Maximum execution time of 6 seconds exceeded in <b>/home/vhosts/hurricane-disco.nl/httpdocs/rummikub/stable.php</b> on line <b>143</b><br />
+]]></response>
+  </turn>
+  <turn no='66' player='2' rpc-delay='0.074935s'>
+   <pass count='3'/>
+   <tiles value='93'>K11.K13.R12.K9.B7.B5.K13.B10.B13</tiles>
+  </turn>
+  <turn no='67' player='3' rpc-delay='0.077385s'>
+   <pass count='4'/>
+   <tiles value='49'>K2.B12.B13.B3.G13.B6</tiles>
+  </turn>
+ </turns>
+
+ <scores>
+  <score player='1'>161</score>
+  <score player='2'>93</score>
+  <score player='3'>49</score>
+  <score player='4'>233</score>
+ </scores>
+</rummikub-transcript>
