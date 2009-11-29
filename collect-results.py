@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-import elementtree.ElementTree as ET
+import xml.etree.cElementTree as ET
 import sys, os.path, glob
 
 # some hard-coded constants: (ugly)

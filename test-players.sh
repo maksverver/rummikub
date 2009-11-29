@@ -22,10 +22,10 @@ do
 
 		if [ "$METHOD" = POST ]
 		then
-			res=`curl -s --data "$QUERY" "$URL"`
+			res=`curl -m 5 -s --data "$QUERY" "$URL"`
 		elif [ "$METHOD" = GET ]
 		then
-			res=`curl -s "$URL"'?'"$QUERY"`
+			res=`curl -m 5 -s "$URL"'?'"$QUERY"`
 		else
 			echo "Invalid request method in $FILE!"
 			res=-

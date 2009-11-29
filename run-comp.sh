@@ -56,7 +56,8 @@ do
 			P3=players/`cut -f3 "$match"`
 			P4=players/`cut -f4 "$match"`
 			echo "Running match $name with $P1, $P2, $P3 and $P4..."
-			tmp=`tempfile -m 0644`
+			tmp=`mktemp`
+			chmod 0644 "$tmp"
 			if ! "$ARBITER" "$P1" "$P2" "$P3" "$P4" "$tiles" > "$tmp"
 			then
 				cat "$tmp"    # show arbiter error message
