@@ -6,10 +6,10 @@ static const char *colors = "RGBK";
 /* Parse tiles seperated by periods and/or hyphens into a TileCollection: */
 static void parse_tiles(char *str, TileCollection set)
 {
-    char *tok, *ptr;
+    char *tok;
 
     memset(set, 0, sizeof(TileCollection));
-    for (tok = strtok_r(str, ".-", &ptr); tok; tok = strtok_r(NULL, ".-", &ptr))
+    for (tok = strtok(str, ".-"); tok; tok = strtok(NULL, ".-"))
     {
         char *p = strchr(colors, tok[0]);
         int v = atoi(tok + 1) - 1, c = p ? p - colors : -1;
