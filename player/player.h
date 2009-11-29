@@ -20,7 +20,7 @@ char *strtok_r(char *s, const char *sep, char **save);
 #define K    2        /* number of duplicates of each tile */
 
 /* Determines the penalty score for a tile with face value v (0 <= v < V) */
-#define TILE_VALUE(v)  ((1 + (v)) * (1 + (v)))
+#define TILE_VALUE(v)  (1 + (v))
 
 /* A TileColection is an array of counts for each type of tile. */
 typedef int TileCollection[V][C];
