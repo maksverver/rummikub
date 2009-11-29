@@ -5,13 +5,13 @@
 #include <assert.h>
 #include <stdlib.h>
 #include <string.h>
-#ifndef _WIN32  /* POSIX */
+
+#if __STDC_VERSION__ >= 199901L
 #include <stdbool.h>
-#else  /* Windows */
+#else
 typedef unsigned char bool;
 #define true  1
 #define false 0
-char *strtok_r(char *s, const char *sep, char **save);
 #endif
 
 /* Game parameters: */
